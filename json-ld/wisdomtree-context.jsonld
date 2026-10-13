@@ -1,0 +1,1135 @@
+{
+  "@context": {
+    "@vocab": "https://wisdomtree.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "wisdomtree": "https://wisdomtree.com/schema#",
+    "APIKeyCreate": "wisdomtree:APIKeyCreate",
+    "name": {
+      "@id": "wisdomtree:name",
+      "@type": "xsd:string"
+    },
+    "APIKeyCreateResponse": "wisdomtree:APIKeyCreateResponse",
+    "id": {
+      "@id": "wisdomtree:id",
+      "@type": "xsd:integer"
+    },
+    "client_id": {
+      "@id": "wisdomtree:client_id",
+      "@type": "xsd:string"
+    },
+    "client_type": {
+      "@id": "wisdomtree:client_type",
+      "@type": "xsd:string"
+    },
+    "authorization_grant_type": {
+      "@id": "wisdomtree:authorization_grant_type",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "wisdomtree:created",
+      "@type": "xsd:dateTime"
+    },
+    "updated": {
+      "@id": "wisdomtree:updated",
+      "@type": "xsd:dateTime"
+    },
+    "client_secret": {
+      "@id": "wisdomtree:client_secret",
+      "@type": "xsd:string"
+    },
+    "token_endpoint": {
+      "@id": "wisdomtree:token_endpoint",
+      "@type": "xsd:string"
+    },
+    "grant_type": {
+      "@id": "wisdomtree:grant_type",
+      "@type": "xsd:string"
+    },
+    "supported_scopes": {
+      "@id": "wisdomtree:supported_scopes",
+      "@container": "@list"
+    },
+    "APIKeyListItem": "wisdomtree:APIKeyListItem",
+    "APIKeyListResponse": "wisdomtree:APIKeyListResponse",
+    "data": {
+      "@id": "wisdomtree:data",
+      "@container": "@list"
+    },
+    "AddProductEntitlement": "wisdomtree:AddProductEntitlement",
+    "exchange_code": {
+      "@id": "wisdomtree:exchange_code",
+      "@type": "xsd:string"
+    },
+    "constituent_code": {
+      "@id": "wisdomtree:constituent_code",
+      "@type": "xsd:string"
+    },
+    "entitlement_date": {
+      "@id": "wisdomtree:entitlement_date",
+      "@type": "xsd:date"
+    },
+    "entitlement": {
+      "@id": "wisdomtree:entitlement",
+      "@type": "xsd:decimal"
+    },
+    "AddProductPrice": "wisdomtree:AddProductPrice",
+    "price_date": {
+      "@id": "wisdomtree:price_date",
+      "@type": "xsd:date"
+    },
+    "base_price": {
+      "@id": "wisdomtree:base_price",
+      "@type": "xsd:decimal"
+    },
+    "settlement_price": {
+      "@id": "wisdomtree:settlement_price",
+      "@type": "xsd:decimal"
+    },
+    "fx_rate": {
+      "@id": "wisdomtree:fx_rate",
+      "@type": "xsd:decimal"
+    },
+    "is_market_disruption": {
+      "@id": "wisdomtree:is_market_disruption",
+      "@type": "xsd:boolean"
+    },
+    "day_count": {
+      "@id": "wisdomtree:day_count",
+      "@type": "xsd:integer"
+    },
+    "re_fee": {
+      "@id": "wisdomtree:re_fee",
+      "@type": "xsd:decimal"
+    },
+    "ConstituentRead": "wisdomtree:ConstituentRead",
+    "code": {
+      "@id": "wisdomtree:code",
+      "@type": "xsd:string"
+    },
+    "settlement_decimal_place": {
+      "@id": "wisdomtree:settlement_decimal_place",
+      "@type": "xsd:integer"
+    },
+    "ConstituentUpdate": "wisdomtree:ConstituentUpdate",
+    "ConstituentWrite": "wisdomtree:ConstituentWrite",
+    "CreateOrderNote": "wisdomtree:CreateOrderNote",
+    "comment": {
+      "@id": "wisdomtree:comment",
+      "@type": "xsd:string"
+    },
+    "CurrentUser": "wisdomtree:CurrentUser",
+    "address": {
+      "@id": "wisdomtree:address"
+    },
+    "email": {
+      "@id": "wisdomtree:email",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "wisdomtree:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "wisdomtree:last_name",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "wisdomtree:username",
+      "@type": "xsd:string"
+    },
+    "organisation": {
+      "@id": "wisdomtree:organisation",
+      "@type": "xsd:string"
+    },
+    "client_organizations": {
+      "@id": "wisdomtree:client_organizations",
+      "@type": "xsd:string"
+    },
+    "DepositAddressResponse": "wisdomtree:DepositAddressResponse",
+    "wisdomtree_deposit_address": {
+      "@id": "wisdomtree:wisdomtree_deposit_address",
+      "@type": "xsd:string"
+    },
+    "DividendPaymentPreferenceDetail": "wisdomtree:DividendPaymentPreferenceDetail",
+    "dividend_mapping_id": {
+      "@id": "wisdomtree:dividend_mapping_id",
+      "@type": "xsd:integer"
+    },
+    "token_id": {
+      "@id": "wisdomtree:token_id",
+      "@type": "xsd:integer"
+    },
+    "organisation_id": {
+      "@id": "wisdomtree:organisation_id",
+      "@type": "xsd:integer"
+    },
+    "asset_name": {
+      "@id": "wisdomtree:asset_name",
+      "@type": "xsd:string"
+    },
+    "asset_symbol": {
+      "@id": "wisdomtree:asset_symbol",
+      "@type": "xsd:string"
+    },
+    "block_chain": {
+      "@id": "wisdomtree:block_chain",
+      "@type": "xsd:string"
+    },
+    "dividend_payment_currency": {
+      "@id": "wisdomtree:dividend_payment_currency",
+      "@type": "xsd:string"
+    },
+    "dividend_payment_currency_label": {
+      "@id": "wisdomtree:dividend_payment_currency_label",
+      "@type": "xsd:string"
+    },
+    "field_details": {
+      "@id": "wisdomtree:field_details"
+    },
+    "DividendPaymentPreferenceListItem": "wisdomtree:DividendPaymentPreferenceListItem",
+    "EditDividendPaymentPreferences": "wisdomtree:EditDividendPaymentPreferences",
+    "blockchain": {
+      "@id": "wisdomtree:blockchain",
+      "@type": "xsd:string"
+    },
+    "ErrorResponse": "wisdomtree:ErrorResponse",
+    "error": {
+      "@id": "wisdomtree:error",
+      "@type": "xsd:string"
+    },
+    "FieldErrorResponse": "wisdomtree:FieldErrorResponse",
+    "field_name": {
+      "@id": "wisdomtree:field_name",
+      "@container": "@list"
+    },
+    "FundAdminOrganisationListItem": "wisdomtree:FundAdminOrganisationListItem",
+    "organization_id": {
+      "@id": "wisdomtree:organization_id",
+      "@type": "xsd:integer"
+    },
+    "organization_guid": {
+      "@id": "wisdomtree:organization_guid",
+      "@type": "xsd:string"
+    },
+    "organisation_type": {
+      "@id": "wisdomtree:organisation_type",
+      "@type": "xsd:string"
+    },
+    "legal_name": {
+      "@id": "wisdomtree:legal_name",
+      "@type": "xsd:string"
+    },
+    "is_active": {
+      "@id": "wisdomtree:is_active",
+      "@type": "xsd:boolean"
+    },
+    "FundAdminOrganisationListResponse": "wisdomtree:FundAdminOrganisationListResponse",
+    "can_add_organisation": {
+      "@id": "wisdomtree:can_add_organisation",
+      "@type": "xsd:boolean"
+    },
+    "can_update_organisation": {
+      "@id": "wisdomtree:can_update_organisation",
+      "@type": "xsd:boolean"
+    },
+    "GetOpenAccruals": "wisdomtree:GetOpenAccruals",
+    "ticker": {
+      "@id": "wisdomtree:ticker",
+      "@type": "xsd:string"
+    },
+    "wallet_address": {
+      "@id": "wisdomtree:wallet_address",
+      "@type": "xsd:string"
+    },
+    "pending_value": {
+      "@id": "wisdomtree:pending_value",
+      "@type": "xsd:string"
+    },
+    "pending_since": {
+      "@id": "wisdomtree:pending_since",
+      "@type": "xsd:string"
+    },
+    "GetProductEntitlement": "wisdomtree:GetProductEntitlement",
+    "product_id": {
+      "@id": "wisdomtree:product_id",
+      "@type": "xsd:integer"
+    },
+    "constituent_id": {
+      "@id": "wisdomtree:constituent_id",
+      "@type": "xsd:integer"
+    },
+    "GetProductPrice": "wisdomtree:GetProductPrice",
+    "Group": "wisdomtree:Group",
+    "Holiday": "wisdomtree:Holiday",
+    "holiday_date": {
+      "@id": "wisdomtree:holiday_date",
+      "@type": "xsd:date"
+    },
+    "holiday_name": {
+      "@id": "wisdomtree:holiday_name",
+      "@type": "xsd:string"
+    },
+    "holiday_type": {
+      "@id": "wisdomtree:holiday_type",
+      "@type": "xsd:string"
+    },
+    "holiday_reference": {
+      "@id": "wisdomtree:holiday_reference",
+      "@type": "xsd:string"
+    },
+    "reason": {
+      "@id": "wisdomtree:reason",
+      "@type": "xsd:string"
+    },
+    "IndexRead": "wisdomtree:IndexRead",
+    "pricing_ticker": {
+      "@id": "wisdomtree:pricing_ticker",
+      "@type": "xsd:string"
+    },
+    "bloomberg_pricing_ticker": {
+      "@id": "wisdomtree:bloomberg_pricing_ticker",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "wisdomtree:currency",
+      "@type": "xsd:string"
+    },
+    "index_provider": {
+      "@id": "wisdomtree:index_provider",
+      "@type": "xsd:string"
+    },
+    "IndexUpdate": "wisdomtree:IndexUpdate",
+    "IndexWrite": "wisdomtree:IndexWrite",
+    "LatestOrder": "wisdomtree:LatestOrder",
+    "trade_type": {
+      "@id": "wisdomtree:trade_type",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "wisdomtree:user",
+      "@type": "xsd:string"
+    },
+    "org": {
+      "@id": "wisdomtree:org",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "wisdomtree:status",
+      "@type": "xsd:string"
+    },
+    "expected_settlement_date": {
+      "@id": "wisdomtree:expected_settlement_date",
+      "@type": "xsd:dateTime"
+    },
+    "issuer": {
+      "@id": "wisdomtree:issuer",
+      "@type": "xsd:string"
+    },
+    "settlement_currency": {
+      "@id": "wisdomtree:settlement_currency",
+      "@type": "xsd:string"
+    },
+    "order_type": {
+      "@id": "wisdomtree:order_type",
+      "@type": "xsd:string"
+    },
+    "dollar_amount": {
+      "@id": "wisdomtree:dollar_amount",
+      "@type": "xsd:string"
+    },
+    "token_amount": {
+      "@id": "wisdomtree:token_amount",
+      "@type": "xsd:string"
+    },
+    "gross_value": {
+      "@id": "wisdomtree:gross_value",
+      "@type": "xsd:string"
+    },
+    "net_value": {
+      "@id": "wisdomtree:net_value",
+      "@type": "xsd:string"
+    },
+    "transaction_fee": {
+      "@id": "wisdomtree:transaction_fee",
+      "@type": "xsd:string"
+    },
+    "execution_cost_fee": {
+      "@id": "wisdomtree:execution_cost_fee",
+      "@type": "xsd:string"
+    },
+    "order_reference": {
+      "@id": "wisdomtree:order_reference",
+      "@type": "xsd:string"
+    },
+    "order_date": {
+      "@id": "wisdomtree:order_date",
+      "@type": "xsd:date"
+    },
+    "quantity": {
+      "@id": "wisdomtree:quantity",
+      "@type": "xsd:string"
+    },
+    "LatestOrdersIssuer": "wisdomtree:LatestOrdersIssuer",
+    "LatestOrdersResponse": "wisdomtree:LatestOrdersResponse",
+    "orders": {
+      "@id": "wisdomtree:orders",
+      "@container": "@list"
+    },
+    "issuers": {
+      "@id": "wisdomtree:issuers",
+      "@container": "@list"
+    },
+    "can_create_order": {
+      "@id": "wisdomtree:can_create_order",
+      "@type": "xsd:boolean"
+    },
+    "can_view_wallets": {
+      "@id": "wisdomtree:can_view_wallets",
+      "@type": "xsd:boolean"
+    },
+    "can_create_wallet": {
+      "@id": "wisdomtree:can_create_wallet",
+      "@type": "xsd:boolean"
+    },
+    "OnReceiptWallet": "wisdomtree:OnReceiptWallet",
+    "fund": {
+      "@id": "wisdomtree:fund",
+      "@type": "xsd:string"
+    },
+    "Order": "wisdomtree:Order",
+    "OrderHashesResponse": "wisdomtree:OrderHashesResponse",
+    "conversion_order_hash": {
+      "@id": "wisdomtree:conversion_order_hash",
+      "@type": "xsd:string"
+    },
+    "deposit_hash": {
+      "@id": "wisdomtree:deposit_hash",
+      "@type": "xsd:string"
+    },
+    "issuer_order_hash": {
+      "@id": "wisdomtree:issuer_order_hash",
+      "@type": "xsd:string"
+    },
+    "OrderNoteResponse": "wisdomtree:OrderNoteResponse",
+    "created_by": {
+      "@id": "wisdomtree:created_by",
+      "@type": "xsd:string"
+    },
+    "created_on": {
+      "@id": "wisdomtree:created_on",
+      "@type": "xsd:dateTime"
+    },
+    "OrderProductSelectionField": "wisdomtree:OrderProductSelectionField",
+    "label": {
+      "@id": "wisdomtree:label",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "wisdomtree:type",
+      "@type": "xsd:string"
+    },
+    "required": {
+      "@id": "wisdomtree:required",
+      "@type": "xsd:boolean"
+    },
+    "hidden": {
+      "@id": "wisdomtree:hidden",
+      "@type": "xsd:boolean"
+    },
+    "read_only": {
+      "@id": "wisdomtree:read_only",
+      "@type": "xsd:boolean"
+    },
+    "help_text": {
+      "@id": "wisdomtree:help_text",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "wisdomtree:value"
+    },
+    "placeholder": {
+      "@id": "wisdomtree:placeholder",
+      "@type": "xsd:string"
+    },
+    "choices": {
+      "@id": "wisdomtree:choices",
+      "@container": "@list"
+    },
+    "OrderProductSelectionFieldChoice": "wisdomtree:OrderProductSelectionFieldChoice",
+    "OrderProductSelectionProduct": "wisdomtree:OrderProductSelectionProduct",
+    "can_trade": {
+      "@id": "wisdomtree:can_trade",
+      "@type": "xsd:boolean"
+    },
+    "OrderProductSelectionResponse": "wisdomtree:OrderProductSelectionResponse",
+    "products": {
+      "@id": "wisdomtree:products",
+      "@container": "@list"
+    },
+    "selected_product": {
+      "@id": "wisdomtree:selected_product"
+    },
+    "fields": {
+      "@id": "wisdomtree:fields",
+      "@container": "@list"
+    },
+    "OrderReviewBankDetails": "wisdomtree:OrderReviewBankDetails",
+    "beneficiary_name": {
+      "@id": "wisdomtree:beneficiary_name",
+      "@type": "xsd:string"
+    },
+    "beneficiary_account_number": {
+      "@id": "wisdomtree:beneficiary_account_number",
+      "@type": "xsd:string"
+    },
+    "beneficiary_address": {
+      "@id": "wisdomtree:beneficiary_address",
+      "@type": "xsd:string"
+    },
+    "routing_number": {
+      "@id": "wisdomtree:routing_number",
+      "@type": "xsd:string"
+    },
+    "bank_name": {
+      "@id": "wisdomtree:bank_name",
+      "@type": "xsd:string"
+    },
+    "swift_or_bic": {
+      "@id": "wisdomtree:swift_or_bic",
+      "@type": "xsd:string"
+    },
+    "OrderReviewResponse": "wisdomtree:OrderReviewResponse",
+    "bank_details": {
+      "@id": "wisdomtree:bank_details"
+    },
+    "client_settlement_wallet_address": {
+      "@id": "wisdomtree:client_settlement_wallet_address",
+      "@type": "xsd:string"
+    },
+    "client_settlement_wallet_qrcode": {
+      "@id": "wisdomtree:client_settlement_wallet_qrcode",
+      "@type": "xsd:string"
+    },
+    "conversion_fee": {
+      "@id": "wisdomtree:conversion_fee",
+      "@type": "xsd:string"
+    },
+    "gross_value_label": {
+      "@id": "wisdomtree:gross_value_label",
+      "@type": "xsd:string"
+    },
+    "net_value_label": {
+      "@id": "wisdomtree:net_value_label",
+      "@type": "xsd:string"
+    },
+    "network_fee": {
+      "@id": "wisdomtree:network_fee",
+      "@type": "xsd:string"
+    },
+    "payload": {
+      "@id": "wisdomtree:payload"
+    },
+    "product_name": {
+      "@id": "wisdomtree:product_name",
+      "@type": "xsd:string"
+    },
+    "quantity_label": {
+      "@id": "wisdomtree:quantity_label",
+      "@type": "xsd:string"
+    },
+    "rate": {
+      "@id": "wisdomtree:rate",
+      "@type": "xsd:string"
+    },
+    "settlement_text": {
+      "@id": "wisdomtree:settlement_text",
+      "@type": "xsd:string"
+    },
+    "submit_endpoint": {
+      "@id": "wisdomtree:submit_endpoint",
+      "@type": "xsd:string"
+    },
+    "token_contract_address": {
+      "@id": "wisdomtree:token_contract_address",
+      "@type": "xsd:string"
+    },
+    "transaction_fee_label": {
+      "@id": "wisdomtree:transaction_fee_label",
+      "@type": "xsd:string"
+    },
+    "warnings": {
+      "@id": "wisdomtree:warnings",
+      "@container": "@list"
+    },
+    "wisdomtree_deposit_wallet_address": {
+      "@id": "wisdomtree:wisdomtree_deposit_wallet_address",
+      "@type": "xsd:string"
+    },
+    "wisdomtree_deposit_wallet_qrcode": {
+      "@id": "wisdomtree:wisdomtree_deposit_wallet_qrcode",
+      "@type": "xsd:string"
+    },
+    "OrderStatus": "wisdomtree:OrderStatus",
+    "next_status": {
+      "@id": "wisdomtree:next_status",
+      "@type": "xsd:string"
+    },
+    "Organisation": "wisdomtree:Organisation",
+    "emails": {
+      "@id": "wisdomtree:emails",
+      "@container": "@list"
+    },
+    "wallets": {
+      "@id": "wisdomtree:wallets"
+    },
+    "guid": {
+      "@id": "wisdomtree:guid",
+      "@type": "xsd:string"
+    },
+    "OrganisationAddress": "wisdomtree:OrganisationAddress",
+    "line_1": {
+      "@id": "wisdomtree:line_1",
+      "@type": "xsd:string"
+    },
+    "line_2": {
+      "@id": "wisdomtree:line_2",
+      "@type": "xsd:string"
+    },
+    "line_3": {
+      "@id": "wisdomtree:line_3",
+      "@type": "xsd:string"
+    },
+    "town": {
+      "@id": "wisdomtree:town",
+      "@type": "xsd:string"
+    },
+    "area": {
+      "@id": "wisdomtree:area",
+      "@type": "xsd:string"
+    },
+    "post_code": {
+      "@id": "wisdomtree:post_code",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "wisdomtree:country",
+      "@type": "xsd:string"
+    },
+    "telephone_number": {
+      "@id": "wisdomtree:telephone_number",
+      "@type": "xsd:string"
+    },
+    "mobile_number": {
+      "@id": "wisdomtree:mobile_number",
+      "@type": "xsd:string"
+    },
+    "OrganisationExternalWallet": "wisdomtree:OrganisationExternalWallet",
+    "public_key": {
+      "@id": "wisdomtree:public_key",
+      "@type": "xsd:string"
+    },
+    "nickname": {
+      "@id": "wisdomtree:nickname",
+      "@type": "xsd:string"
+    },
+    "OrganisationGUIDResponse": "wisdomtree:OrganisationGUIDResponse",
+    "OrganisationWizardFormField": "wisdomtree:OrganisationWizardFormField",
+    "disabled": {
+      "@id": "wisdomtree:disabled",
+      "@type": "xsd:boolean"
+    },
+    "multiple": {
+      "@id": "wisdomtree:multiple",
+      "@type": "xsd:boolean"
+    },
+    "OrganisationWizardSection": "wisdomtree:OrganisationWizardSection",
+    "key": {
+      "@id": "wisdomtree:key",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "wisdomtree:title",
+      "@type": "xsd:string"
+    },
+    "OrganisationWizardStepItem": "wisdomtree:OrganisationWizardStepItem",
+    "step": {
+      "@id": "wisdomtree:step",
+      "@type": "xsd:integer"
+    },
+    "description": {
+      "@id": "wisdomtree:description",
+      "@type": "xsd:string"
+    },
+    "OrganisationWizardStepResponse": "wisdomtree:OrganisationWizardStepResponse",
+    "mode": {
+      "@id": "wisdomtree:mode",
+      "@type": "xsd:string"
+    },
+    "heading": {
+      "@id": "wisdomtree:heading",
+      "@type": "xsd:string"
+    },
+    "steps": {
+      "@id": "wisdomtree:steps",
+      "@container": "@list"
+    },
+    "organisation_summary": {
+      "@id": "wisdomtree:organisation_summary"
+    },
+    "sections": {
+      "@id": "wisdomtree:sections",
+      "@container": "@list"
+    },
+    "actions": {
+      "@id": "wisdomtree:actions"
+    },
+    "extra": {
+      "@id": "wisdomtree:extra"
+    },
+    "PaginatedGroupList": "wisdomtree:PaginatedGroupList",
+    "count": {
+      "@id": "wisdomtree:count",
+      "@type": "xsd:integer"
+    },
+    "next": {
+      "@id": "wisdomtree:next",
+      "@type": "@id"
+    },
+    "previous": {
+      "@id": "wisdomtree:previous",
+      "@type": "@id"
+    },
+    "results": {
+      "@id": "wisdomtree:results",
+      "@container": "@list"
+    },
+    "PaginatedUserList": "wisdomtree:PaginatedUserList",
+    "PatchedTIPWalletStatusPatch": "wisdomtree:PatchedTIPWalletStatusPatch",
+    "fireblocks_chain_id": {
+      "@id": "wisdomtree:fireblocks_chain_id",
+      "@type": "xsd:integer"
+    },
+    "PatchedWTCUpdateOrderRequest": "wisdomtree:PatchedWTCUpdateOrderRequest",
+    "settlement_date": {
+      "@id": "wisdomtree:settlement_date",
+      "@type": "xsd:dateTime"
+    },
+    "PatchedWalletApprovalRequest": "wisdomtree:PatchedWalletApprovalRequest",
+    "next_state_id": {
+      "@id": "wisdomtree:next_state_id",
+      "@type": "xsd:integer"
+    },
+    "PatchedWalletNicknameUpdate": "wisdomtree:PatchedWalletNicknameUpdate",
+    "PortfolioAsset": "wisdomtree:PortfolioAsset",
+    "token_name": {
+      "@id": "wisdomtree:token_name",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "wisdomtree:price",
+      "@type": "xsd:string"
+    },
+    "token_value_change": {
+      "@id": "wisdomtree:token_value_change",
+      "@type": "xsd:string"
+    },
+    "as_of_date": {
+      "@id": "wisdomtree:as_of_date",
+      "@type": "xsd:date"
+    },
+    "PortfolioPageResponse": "wisdomtree:PortfolioPageResponse",
+    "total_balance": {
+      "@id": "wisdomtree:total_balance",
+      "@type": "xsd:string"
+    },
+    "recent_change": {
+      "@id": "wisdomtree:recent_change",
+      "@type": "xsd:string"
+    },
+    "change_status": {
+      "@id": "wisdomtree:change_status",
+      "@type": "xsd:string"
+    },
+    "assets": {
+      "@id": "wisdomtree:assets",
+      "@container": "@list"
+    },
+    "PortfolioWallet": "wisdomtree:PortfolioWallet",
+    "wallet_id": {
+      "@id": "wisdomtree:wallet_id",
+      "@type": "xsd:integer"
+    },
+    "amount": {
+      "@id": "wisdomtree:amount",
+      "@type": "xsd:string"
+    },
+    "value_change": {
+      "@id": "wisdomtree:value_change",
+      "@type": "xsd:string"
+    },
+    "ProductConstituentRead": "wisdomtree:ProductConstituentRead",
+    "isin": {
+      "@id": "wisdomtree:isin",
+      "@type": "xsd:string"
+    },
+    "start_date": {
+      "@id": "wisdomtree:start_date",
+      "@type": "xsd:date"
+    },
+    "end_date": {
+      "@id": "wisdomtree:end_date",
+      "@type": "xsd:date"
+    },
+    "product_trade_threshold_limit": {
+      "@id": "wisdomtree:product_trade_threshold_limit",
+      "@type": "xsd:string"
+    },
+    "ProductConstituentUpdate": "wisdomtree:ProductConstituentUpdate",
+    "ProductConstituentWrite": "wisdomtree:ProductConstituentWrite",
+    "ProductGroup": "wisdomtree:ProductGroup",
+    "ProductGroupLimit": "wisdomtree:ProductGroupLimit",
+    "product_group": {
+      "@id": "wisdomtree:product_group",
+      "@type": "xsd:integer"
+    },
+    "daily_minimum": {
+      "@id": "wisdomtree:daily_minimum",
+      "@type": "xsd:integer"
+    },
+    "daily_maximum": {
+      "@id": "wisdomtree:daily_maximum",
+      "@type": "xsd:integer"
+    },
+    "aum_minimum": {
+      "@id": "wisdomtree:aum_minimum",
+      "@type": "xsd:integer"
+    },
+    "aum_maximum": {
+      "@id": "wisdomtree:aum_maximum",
+      "@type": "xsd:integer"
+    },
+    "as_of": {
+      "@id": "wisdomtree:as_of",
+      "@type": "xsd:date"
+    },
+    "ProductGroupUpdate": "wisdomtree:ProductGroupUpdate",
+    "ProductInternalRead": "wisdomtree:ProductInternalRead",
+    "base_exchange": {
+      "@id": "wisdomtree:base_exchange",
+      "@type": "xsd:string"
+    },
+    "ric": {
+      "@id": "wisdomtree:ric",
+      "@type": "xsd:string"
+    },
+    "bloomberg": {
+      "@id": "wisdomtree:bloomberg",
+      "@type": "xsd:string"
+    },
+    "sedol": {
+      "@id": "wisdomtree:sedol",
+      "@type": "xsd:string"
+    },
+    "base_currency": {
+      "@id": "wisdomtree:base_currency",
+      "@type": "xsd:string"
+    },
+    "trading_currency": {
+      "@id": "wisdomtree:trading_currency",
+      "@type": "xsd:string"
+    },
+    "is_micro_security": {
+      "@id": "wisdomtree:is_micro_security",
+      "@type": "xsd:boolean"
+    },
+    "seed_date": {
+      "@id": "wisdomtree:seed_date",
+      "@type": "xsd:date"
+    },
+    "listing_date": {
+      "@id": "wisdomtree:listing_date",
+      "@type": "xsd:date"
+    },
+    "closure_date": {
+      "@id": "wisdomtree:closure_date",
+      "@type": "xsd:date"
+    },
+    "script_code": {
+      "@id": "wisdomtree:script_code",
+      "@type": "xsd:string"
+    },
+    "wtp_asset_id": {
+      "@id": "wisdomtree:wtp_asset_id",
+      "@type": "xsd:integer"
+    },
+    "market_type": {
+      "@id": "wisdomtree:market_type",
+      "@type": "xsd:string"
+    },
+    "mds_code": {
+      "@id": "wisdomtree:mds_code",
+      "@type": "xsd:string"
+    },
+    "ptf": {
+      "@id": "wisdomtree:ptf",
+      "@type": "xsd:string"
+    },
+    "hedge_team": {
+      "@id": "wisdomtree:hedge_team",
+      "@type": "xsd:string"
+    },
+    "swap_strat_code": {
+      "@id": "wisdomtree:swap_strat_code",
+      "@type": "xsd:string"
+    },
+    "cpty": {
+      "@id": "wisdomtree:cpty",
+      "@type": "xsd:string"
+    },
+    "security_id": {
+      "@id": "wisdomtree:security_id",
+      "@type": "xsd:string"
+    },
+    "number_of_micro_securities": {
+      "@id": "wisdomtree:number_of_micro_securities",
+      "@type": "xsd:integer"
+    },
+    "product_instrument_type": {
+      "@id": "wisdomtree:product_instrument_type",
+      "@type": "xsd:string"
+    },
+    "leverage_factor": {
+      "@id": "wisdomtree:leverage_factor",
+      "@type": "xsd:string"
+    },
+    "approval_time": {
+      "@id": "wisdomtree:approval_time",
+      "@type": "xsd:string"
+    },
+    "ProductIssuer": "wisdomtree:ProductIssuer",
+    "full_name": {
+      "@id": "wisdomtree:full_name",
+      "@type": "xsd:string"
+    },
+    "display_name": {
+      "@id": "wisdomtree:display_name",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "wisdomtree:timezone",
+      "@type": "xsd:string"
+    },
+    "opening_time": {
+      "@id": "wisdomtree:opening_time",
+      "@type": "xsd:string"
+    },
+    "closing_time": {
+      "@id": "wisdomtree:closing_time",
+      "@type": "xsd:string"
+    },
+    "t_plus_1_approval_time": {
+      "@id": "wisdomtree:t_plus_1_approval_time",
+      "@type": "xsd:string"
+    },
+    "approval_reminder_settings": {
+      "@id": "wisdomtree:approval_reminder_settings"
+    },
+    "pre_order_approval_reminder_settings": {
+      "@id": "wisdomtree:pre_order_approval_reminder_settings"
+    },
+    "ProductIssuerLimit": "wisdomtree:ProductIssuerLimit",
+    "product_issuer": {
+      "@id": "wisdomtree:product_issuer",
+      "@type": "xsd:integer"
+    },
+    "ProductIssuerOrganisationLimit": "wisdomtree:ProductIssuerOrganisationLimit",
+    "imposing_organisation": {
+      "@id": "wisdomtree:imposing_organisation",
+      "@type": "xsd:integer"
+    },
+    "restricted_organisation": {
+      "@id": "wisdomtree:restricted_organisation",
+      "@type": "xsd:integer"
+    },
+    "ProductLimit": "wisdomtree:ProductLimit",
+    "product": {
+      "@id": "wisdomtree:product",
+      "@type": "xsd:integer"
+    },
+    "order_minimum": {
+      "@id": "wisdomtree:order_minimum",
+      "@type": "xsd:integer"
+    },
+    "order_maximum": {
+      "@id": "wisdomtree:order_maximum",
+      "@type": "xsd:integer"
+    },
+    "within_group_minimum": {
+      "@id": "wisdomtree:within_group_minimum",
+      "@type": "xsd:integer"
+    },
+    "within_group_maximum": {
+      "@id": "wisdomtree:within_group_maximum",
+      "@type": "xsd:integer"
+    },
+    "number_of_securities": {
+      "@id": "wisdomtree:number_of_securities",
+      "@type": "xsd:integer"
+    },
+    "ProductLimitOverride": "wisdomtree:ProductLimitOverride",
+    "start_datetime": {
+      "@id": "wisdomtree:start_datetime",
+      "@type": "xsd:dateTime"
+    },
+    "end_datetime": {
+      "@id": "wisdomtree:end_datetime",
+      "@type": "xsd:dateTime"
+    },
+    "ProductRead": "wisdomtree:ProductRead",
+    "ProductTradingEvaluation": "wisdomtree:ProductTradingEvaluation",
+    "date": {
+      "@id": "wisdomtree:date",
+      "@type": "xsd:date"
+    },
+    "is_trading_holiday": {
+      "@id": "wisdomtree:is_trading_holiday",
+      "@type": "xsd:boolean"
+    },
+    "ProductUpdate": "wisdomtree:ProductUpdate",
+    "ProductWrite": "wisdomtree:ProductWrite",
+    "QuickMarketMappingResponse": "wisdomtree:QuickMarketMappingResponse",
+    "trade_details": {
+      "@id": "wisdomtree:trade_details"
+    },
+    "trade_icons": {
+      "@id": "wisdomtree:trade_icons"
+    },
+    "StatementListItem": "wisdomtree:StatementListItem",
+    "statement_id": {
+      "@id": "wisdomtree:statement_id",
+      "@type": "xsd:integer"
+    },
+    "period_start": {
+      "@id": "wisdomtree:period_start",
+      "@type": "xsd:string"
+    },
+    "period_end": {
+      "@id": "wisdomtree:period_end",
+      "@type": "xsd:string"
+    },
+    "document": {
+      "@id": "wisdomtree:document",
+      "@type": "xsd:string"
+    },
+    "filename": {
+      "@id": "wisdomtree:filename",
+      "@type": "xsd:string"
+    },
+    "download_url": {
+      "@id": "wisdomtree:download_url",
+      "@type": "xsd:string"
+    },
+    "SuccessResponse": "wisdomtree:SuccessResponse",
+    "message": {
+      "@id": "wisdomtree:message",
+      "@type": "xsd:string"
+    },
+    "UpdateOrderStatusRequest": "wisdomtree:UpdateOrderStatusRequest",
+    "User": "wisdomtree:User",
+    "UserListForAdminItem": "wisdomtree:UserListForAdminItem",
+    "user_name": {
+      "@id": "wisdomtree:user_name",
+      "@type": "xsd:string"
+    },
+    "organisation_name": {
+      "@id": "wisdomtree:organisation_name",
+      "@type": "xsd:string"
+    },
+    "last_login": {
+      "@id": "wisdomtree:last_login",
+      "@type": "xsd:dateTime"
+    },
+    "date_joined": {
+      "@id": "wisdomtree:date_joined",
+      "@type": "xsd:dateTime"
+    },
+    "UserListForAdminResponse": "wisdomtree:UserListForAdminResponse",
+    "can_add_user": {
+      "@id": "wisdomtree:can_add_user",
+      "@type": "xsd:boolean"
+    },
+    "can_update_user": {
+      "@id": "wisdomtree:can_update_user",
+      "@type": "xsd:boolean"
+    },
+    "WTC": "wisdomtree:WTC",
+    "settlement_wallet": {
+      "@id": "wisdomtree:settlement_wallet",
+      "@type": "xsd:string"
+    },
+    "wisdomtree_deposit_wallet": {
+      "@id": "wisdomtree:wisdomtree_deposit_wallet",
+      "@type": "xsd:string"
+    },
+    "WTCOrderDetailsResponse": "wisdomtree:WTCOrderDetailsResponse",
+    "settlement_currency_name": {
+      "@id": "wisdomtree:settlement_currency_name",
+      "@type": "xsd:string"
+    },
+    "settlement_wallet_address": {
+      "@id": "wisdomtree:settlement_wallet_address",
+      "@type": "xsd:string"
+    },
+    "wisdomtree_deposit_wallet_address_qrcode": {
+      "@id": "wisdomtree:wisdomtree_deposit_wallet_address_qrcode",
+      "@type": "xsd:string"
+    },
+    "org_address": {
+      "@id": "wisdomtree:org_address",
+      "@type": "xsd:string"
+    },
+    "notes": {
+      "@id": "wisdomtree:notes",
+      "@type": "xsd:string"
+    },
+    "status_log": {
+      "@id": "wisdomtree:status_log",
+      "@type": "xsd:string"
+    },
+    "WalletActionResponse": "wisdomtree:WalletActionResponse",
+    "WalletChainResponse": "wisdomtree:WalletChainResponse",
+    "chain_id": {
+      "@id": "wisdomtree:chain_id",
+      "@type": "xsd:integer"
+    },
+    "WalletCreateMetadataResponse": "wisdomtree:WalletCreateMetadataResponse",
+    "WalletCreateOrganisationChoice": "wisdomtree:WalletCreateOrganisationChoice",
+    "organization_name": {
+      "@id": "wisdomtree:organization_name",
+      "@type": "xsd:string"
+    },
+    "WalletDetails": "wisdomtree:WalletDetails",
+    "wallet_guid": {
+      "@id": "wisdomtree:wallet_guid",
+      "@type": "xsd:string"
+    },
+    "WalletEditDetailResponse": "wisdomtree:WalletEditDetailResponse",
+    "WalletListItemResponse": "wisdomtree:WalletListItemResponse",
+    "wallet_nickname": {
+      "@id": "wisdomtree:wallet_nickname",
+      "@type": "xsd:string"
+    },
+    "WalletListResponse": "wisdomtree:WalletListResponse",
+    "WalletOrganisationSummary": "wisdomtree:WalletOrganisationSummary",
+    "WalletResponse": "wisdomtree:WalletResponse"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "WisdomTree API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects WisdomTree's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/wisdomtree-connect-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/wisdomtree-connect-openapi.yml"
+  ]
+}

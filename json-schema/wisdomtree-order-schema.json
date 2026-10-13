@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisdomtree/main/json-schema/wisdomtree-order-schema.json",
+  "title": "Order",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/wisdomtree-connect-openapi.yml#/components/schemas/Order",
+  "type": "object",
+  "properties": {
+    "trade_type": {
+      "type": "string",
+      "description": "Allowed: 'Purchase', 'Sale'."
+    },
+    "user": {
+      "type": "string"
+    },
+    "org": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "readOnly": true
+    },
+    "expected_settlement_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp (inclusive, ISO-8601 format)"
+    },
+    "exchange_code": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "blockchain": {
+      "type": "string",
+      "readOnly": true
+    },
+    "settlement_currency": {
+      "type": "string",
+      "readOnly": true
+    },
+    "order_type": {
+      "type": "string",
+      "readOnly": true
+    },
+    "dollar_amount": {
+      "type": "string",
+      "readOnly": true
+    },
+    "token_amount": {
+      "type": "string",
+      "readOnly": true
+    },
+    "gross_value": {
+      "type": "string",
+      "readOnly": true
+    },
+    "net_value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$",
+      "readOnly": true
+    },
+    "transaction_fee": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$",
+      "readOnly": true
+    },
+    "execution_cost_fee": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$",
+      "readOnly": true
+    },
+    "order_reference": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "order_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$"
+    }
+  },
+  "required": [
+    "blockchain",
+    "dollar_amount",
+    "exchange_code",
+    "execution_cost_fee",
+    "gross_value",
+    "issuer",
+    "net_value",
+    "order_type",
+    "org",
+    "quantity",
+    "settlement_currency",
+    "status",
+    "token_amount",
+    "trade_type",
+    "transaction_fee",
+    "user"
+  ]
+}

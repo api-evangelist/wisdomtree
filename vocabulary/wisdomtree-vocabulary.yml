@@ -1,0 +1,430 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/wisdomtree-connect-openapi.yml
+vocabulary:
+  name: WisdomTree Domain Vocabulary
+  description: 'Terms declared by WisdomTree''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-14'
+  terms:
+  - term: APIKeyCreate
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/APIKeyCreate
+  - term: APIKeyCreateResponse
+    definition: 'Object declared by the contract with fields: id, name, client_id, client_type, authorization_grant_type, created, updated, client_secret,
+      token_endpoint, grant_type, supported_scopes.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/APIKeyCreateResponse
+  - term: APIKeyListItem
+    definition: 'Object declared by the contract with fields: id, name, client_id, client_type, authorization_grant_type, created, updated.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/APIKeyListItem
+  - term: APIKeyListResponse
+    definition: 'Object declared by the contract with fields: data, token_endpoint, grant_type, supported_scopes.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/APIKeyListResponse
+  - term: AddProductEntitlement
+    definition: 'Object declared by the contract with fields: exchange_code, constituent_code, entitlement_date, entitlement.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/AddProductEntitlement
+  - term: AddProductPrice
+    definition: 'Object declared by the contract with fields: exchange_code, price_date, base_price, settlement_price, fx_rate, is_market_disruption,
+      day_count, re_fee.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/AddProductPrice
+  - term: ConstituentRead
+    definition: 'Object declared by the contract with fields: name, code, settlement_decimal_place.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ConstituentRead
+  - term: ConstituentUpdate
+    definition: 'Object declared by the contract with fields: code, name, settlement_decimal_place.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ConstituentUpdate
+  - term: ConstituentWrite
+    definition: 'Object declared by the contract with fields: name, code, settlement_decimal_place.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ConstituentWrite
+  - term: CreateOrderNote
+    definition: 'Object declared by the contract with fields: comment.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/CreateOrderNote
+  - term: CurrentUser
+    definition: 'Object declared by the contract with fields: address, email, first_name, last_name, username, organisation, client_organizations.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/CurrentUser
+  - term: DepositAddressResponse
+    definition: 'Object declared by the contract with fields: wisdomtree_deposit_address.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/DepositAddressResponse
+  - term: DividendPaymentPreferenceDetail
+    definition: 'Object declared by the contract with fields: dividend_mapping_id, token_id, organisation_id, asset_name, asset_symbol, block_chain,
+      dividend_payment_currency, dividend_payment_currency_label, field_details.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/DividendPaymentPreferenceDetail
+  - term: DividendPaymentPreferenceListItem
+    definition: 'Object declared by the contract with fields: dividend_mapping_id, token_id, organisation_id, asset_name, asset_symbol, block_chain,
+      dividend_payment_currency.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/DividendPaymentPreferenceListItem
+  - term: EditDividendPaymentPreferences
+    definition: Serializer for updating the dividend payment preferences for an organisation.
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/EditDividendPaymentPreferences
+  - term: ErrorResponse
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ErrorResponse
+  - term: FieldErrorResponse
+    definition: 'Object declared by the contract with fields: field_name.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/FieldErrorResponse
+  - term: FundAdminOrganisationListItem
+    definition: 'Object declared by the contract with fields: organization_id, organization_guid, name, organisation_type, legal_name, is_active.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/FundAdminOrganisationListItem
+  - term: FundAdminOrganisationListResponse
+    definition: 'Object declared by the contract with fields: data, can_add_organisation, can_update_organisation.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/FundAdminOrganisationListResponse
+  - term: GetOpenAccruals
+    definition: Serializer for returning pending accruals for an organisation.
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/GetOpenAccruals
+  - term: GetProductEntitlement
+    definition: 'Object declared by the contract with fields: exchange_code, product_id, constituent_id, constituent_code, entitlement_date, entitlement.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/GetProductEntitlement
+  - term: GetProductPrice
+    definition: 'Object declared by the contract with fields: exchange_code, price_date, base_price, settlement_price, fx_rate, is_market_disruption,
+      day_count.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/GetProductPrice
+  - term: Group
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/Group
+  - term: Holiday
+    definition: 'Object declared by the contract with fields: id, holiday_date, holiday_name, holiday_type, holiday_reference, reason.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/Holiday
+  - term: IndexRead
+    definition: 'Object declared by the contract with fields: name, pricing_ticker, bloomberg_pricing_ticker, currency, index_provider.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/IndexRead
+  - term: IndexUpdate
+    definition: 'Object declared by the contract with fields: pricing_ticker, name, currency, bloomberg_pricing_ticker, index_provider.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/IndexUpdate
+  - term: IndexWrite
+    definition: 'Object declared by the contract with fields: name, currency, pricing_ticker, bloomberg_pricing_ticker, index_provider.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/IndexWrite
+  - term: LatestOrder
+    definition: 'Object declared by the contract with fields: trade_type, user, org, status, expected_settlement_date, exchange_code, issuer,
+      blockchain, settlement_currency, order_type, dollar_amount, token_amount. (7 more)'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/LatestOrder
+  - term: LatestOrdersIssuer
+    definition: 'Object declared by the contract with fields: code, name.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/LatestOrdersIssuer
+  - term: LatestOrdersResponse
+    definition: 'Object declared by the contract with fields: orders, issuers, can_create_order, can_view_wallets, can_create_wallet.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/LatestOrdersResponse
+  - term: OnReceiptWallet
+    definition: 'Object declared by the contract with fields: trade_type, blockchain, fund, currency, wallet_address.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OnReceiptWallet
+  - term: Order
+    definition: 'Object declared by the contract with fields: trade_type, user, org, status, expected_settlement_date, exchange_code, issuer,
+      blockchain, settlement_currency, order_type, dollar_amount, token_amount. (7 more)'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/Order
+  - term: OrderHashesResponse
+    definition: 'Object declared by the contract with fields: order_reference, conversion_order_hash, deposit_hash, issuer_order_hash.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderHashesResponse
+  - term: OrderNoteResponse
+    definition: 'Object declared by the contract with fields: comment, created_by, created_on.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderNoteResponse
+  - term: OrderProductSelectionField
+    definition: 'Object declared by the contract with fields: name, label, type, required, hidden, read_only, help_text, value, placeholder, choices.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderProductSelectionField
+  - term: OrderProductSelectionFieldChoice
+    definition: 'Object declared by the contract with fields: value, label.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderProductSelectionFieldChoice
+  - term: OrderProductSelectionProduct
+    definition: 'Object declared by the contract with fields: id, name, exchange_code, issuer, can_trade.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderProductSelectionProduct
+  - term: OrderProductSelectionResponse
+    definition: 'Object declared by the contract with fields: products, selected_product, fields.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderProductSelectionResponse
+  - term: OrderReviewBankDetails
+    definition: 'Object declared by the contract with fields: beneficiary_name, beneficiary_account_number, beneficiary_address, routing_number,
+      bank_name, swift_or_bic.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderReviewBankDetails
+  - term: OrderReviewResponse
+    definition: 'Object declared by the contract with fields: bank_details, blockchain, can_trade, client_settlement_wallet_address, client_settlement_wallet_qrcode,
+      conversion_fee, exchange_code, expected_settlement_date, gross_value, gross_value_label, issuer, net_value. (18 more)'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderReviewResponse
+  - term: OrderStatus
+    definition: 'Object declared by the contract with fields: status, next_status.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderStatus
+  - term: Organisation
+    definition: 'Object declared by the contract with fields: address, emails, wallets, guid, name, legal_name.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/Organisation
+  - term: OrganisationAddress
+    definition: 'Object declared by the contract with fields: line_1, line_2, line_3, town, area, post_code, country, telephone_number, mobile_number.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationAddress
+  - term: OrganisationExternalWallet
+    definition: 'Object declared by the contract with fields: public_key, blockchain, nickname, organization_guid.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationExternalWallet
+  - term: OrganisationGUIDResponse
+    definition: 'Object declared by the contract with fields: guid.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationGUIDResponse
+  - term: OrganisationWizardFormField
+    definition: 'Object declared by the contract with fields: name, label, type, required, disabled, hidden, multiple, value, choices.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationWizardFormField
+  - term: OrganisationWizardSection
+    definition: 'Object declared by the contract with fields: key, title, fields.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationWizardSection
+  - term: OrganisationWizardStepItem
+    definition: 'Object declared by the contract with fields: step, title, description, status.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationWizardStepItem
+  - term: OrganisationWizardStepResponse
+    definition: 'Object declared by the contract with fields: mode, step, heading, description, steps, organisation_summary, sections, fields,
+      actions, extra.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrganisationWizardStepResponse
+  - term: PaginatedGroupList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PaginatedGroupList
+  - term: PaginatedUserList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PaginatedUserList
+  - term: PatchedTIPWalletStatusPatch
+    definition: 'Object declared by the contract with fields: public_key, fireblocks_chain_id, status.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PatchedTIPWalletStatusPatch
+  - term: PatchedWTCUpdateOrderRequest
+    definition: 'Object declared by the contract with fields: rate, next_status, expected_settlement_date, settlement_date, conversion_order_hash,
+      deposit_hash, issuer_order_hash.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PatchedWTCUpdateOrderRequest
+  - term: PatchedWalletApprovalRequest
+    definition: 'Object declared by the contract with fields: next_state_id.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PatchedWalletApprovalRequest
+  - term: PatchedWalletNicknameUpdate
+    definition: 'Object declared by the contract with fields: nickname.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PatchedWalletNicknameUpdate
+  - term: PortfolioAsset
+    definition: 'Object declared by the contract with fields: ticker, token_id, token_name, token_amount, price, value, token_value_change, as_of_date,
+      wallets.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PortfolioAsset
+  - term: PortfolioPageResponse
+    definition: 'Object declared by the contract with fields: total_balance, recent_change, change_status, assets.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PortfolioPageResponse
+  - term: PortfolioWallet
+    definition: 'Object declared by the contract with fields: wallet_id, blockchain, address, amount, value, value_change.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/PortfolioWallet
+  - term: ProductConstituentRead
+    definition: 'Object declared by the contract with fields: exchange_code, isin, constituent_code, start_date, end_date, product_trade_threshold_limit.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductConstituentRead
+  - term: ProductConstituentUpdate
+    definition: 'Object declared by the contract with fields: exchange_code, isin, constituent_code, start_date, end_date, product_trade_threshold_limit.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductConstituentUpdate
+  - term: ProductConstituentWrite
+    definition: 'Object declared by the contract with fields: exchange_code, isin, constituent_code, start_date, end_date, product_trade_threshold_limit.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductConstituentWrite
+  - term: ProductGroup
+    definition: 'Object declared by the contract with fields: name, products.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductGroup
+  - term: ProductGroupLimit
+    definition: 'Object declared by the contract with fields: id, product_group, daily_minimum, daily_maximum, aum_minimum, aum_maximum, currency,
+      as_of.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductGroupLimit
+  - term: ProductGroupUpdate
+    definition: 'Object declared by the contract with fields: products.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductGroupUpdate
+  - term: ProductInternalRead
+    definition: 'Object declared by the contract with fields: id, name, issuer, base_exchange, pricing_ticker, exchange_code, ric, bloomberg,
+      isin, sedol, base_currency, trading_currency. (19 more)'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductInternalRead
+  - term: ProductIssuer
+    definition: 'Object declared by the contract with fields: id, name, full_name, display_name, timezone, is_active, opening_time, closing_time,
+      approval_time, t_plus_1_approval_time, approval_reminder_settings, pre_order_approval_reminder_settings.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductIssuer
+  - term: ProductIssuerLimit
+    definition: 'Object declared by the contract with fields: id, product_issuer, daily_minimum, daily_maximum, aum_maximum, currency, as_of.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductIssuerLimit
+  - term: ProductIssuerOrganisationLimit
+    definition: 'Object declared by the contract with fields: id, imposing_organisation, restricted_organisation, product_issuer, daily_maximum,
+      aum_maximum, currency, as_of.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductIssuerOrganisationLimit
+  - term: ProductLimit
+    definition: 'Object declared by the contract with fields: id, product, order_minimum, order_maximum, daily_minimum, daily_maximum, aum_maximum,
+      within_group_minimum, within_group_maximum, number_of_securities, currency, as_of.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductLimit
+  - term: ProductLimitOverride
+    definition: 'Object declared by the contract with fields: id, product, order_minimum, order_maximum, currency, start_datetime, end_datetime.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductLimitOverride
+  - term: ProductRead
+    definition: 'Object declared by the contract with fields: name, issuer, exchange_code, isin.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductRead
+  - term: ProductTradingEvaluation
+    definition: 'Object declared by the contract with fields: name, issuer, exchange_code, isin, date, is_trading_holiday.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductTradingEvaluation
+  - term: ProductUpdate
+    definition: 'Object declared by the contract with fields: isin, issuer, base_exchange, pricing_ticker, name, exchange_code, ric, bloomberg,
+      sedol, base_currency, trading_currency, settlement_currency. (16 more)'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductUpdate
+  - term: ProductWrite
+    definition: 'Object declared by the contract with fields: isin, issuer, base_exchange, pricing_ticker, name, exchange_code, ric, bloomberg,
+      sedol, base_currency, trading_currency, settlement_currency. (16 more)'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/ProductWrite
+  - term: QuickMarketMappingResponse
+    definition: 'Object declared by the contract with fields: trade_details, trade_icons.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/QuickMarketMappingResponse
+  - term: StatementListItem
+    definition: 'Object declared by the contract with fields: statement_id, period_start, period_end, document, filename, download_url.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/StatementListItem
+  - term: SuccessResponse
+    definition: 'Object declared by the contract with fields: message.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/SuccessResponse
+  - term: UpdateOrderStatusRequest
+    definition: 'Object declared by the contract with fields: order_reference, next_status.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/UpdateOrderStatusRequest
+  - term: User
+    definition: 'Object declared by the contract with fields: username, email, first_name, last_name, organisation.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/User
+  - term: UserListForAdminItem
+    definition: 'Object declared by the contract with fields: id, email, user_name, organisation_name, first_name, last_name, is_active, timezone,
+      last_login, date_joined.'
+    tags:
+    - Object
+    source: openapi/wisdomtree-connect-openapi.yml#/components/schemas/UserListForAdminItem

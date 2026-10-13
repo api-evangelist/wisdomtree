@@ -1,0 +1,28 @@
+generated: '2026-10-14'
+method: derived
+source: openapi/wisdomtree-connect-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/wisdomtree-connect-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+scopes:
+- scope: groups
+  description: Access to your groups
+  flows:
+  - password
+  sources:
+  - openapi/wisdomtree-connect-openapi.yml
+- scope: read
+  description: Read scope
+  flows:
+  - password
+  sources:
+  - openapi/wisdomtree-connect-openapi.yml
+- scope: write
+  description: Write scope
+  flows:
+  - password
+  sources:
+  - openapi/wisdomtree-connect-openapi.yml

@@ -1,0 +1,201 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/wisdomtree-connect-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on www.wisdomtree.com, api.wisdomtree.com; verdict absent. Candidate tools
+  below are derived from the 35 operation(s) in the provider's own OpenAPI (35 listed); they describe what a server WOULD expose, not one that
+  exists.
+tools:
+- name: retrieves open accruals
+  operationId: Retrieves Open Accruals
+  method: GET
+  path: /api/accruals/
+  description: Retrieves a list of all open accruals for organization.
+- name: retrieves all dividend payment preferences
+  operationId: Retrieves All Dividend Payment Preferences
+  method: GET
+  path: /api/dividend-payment-preferences/
+  description: Retrieves the dividend payment preferences table content for the organization.
+- name: retrieve dividend payment preference details
+  operationId: Retrieve Dividend Payment Preference Details
+  method: GET
+  path: /api/dividend-payment-preferences/{dpp_guid}
+  description: Retrieves a specific dividend payment preference record together with editable field metadata such as dividend payment currency
+    choices.
+- name: update dividend payment preferences
+  operationId: Update Dividend Payment Preferences
+  method: POST
+  path: /api/dividend-payment-preferences/{dpp_guid}/edit
+  description: Updates the dividend payment preference for a specific organization mapping.
+- name: download dividend payment preferences workbook
+  operationId: Download Dividend Payment Preferences Workbook
+  method: GET
+  path: /api/dividend-payment-preferences/export
+  description: Downloads the dividend payment preferences table as an Excel workbook.
+- name: create order
+  operationId: Create Order
+  method: POST
+  path: /api/orders/
+  description: Creates a new order. Schema depends on issuer_name.
+- name: retrieves order details
+  operationId: Retrieves Order Details
+  method: GET
+  path: /api/orders/{order_reference}
+  description: Retrieves details of a specific order.
+- name: fetch missing order hashes
+  operationId: Fetch Missing Order Hashes
+  method: POST
+  path: /api/orders/{order_reference}/fetch-hash
+  description: Fetches missing conversion, deposit, and issuer transaction hashes for a settled, accessible order and returns the stored hashes.
+    USD orders use only the issuer
+- name: create order note
+  operationId: Create Order Note
+  method: POST
+  path: /api/orders/{order_reference}/notes
+  description: Creates a comment note for a specific order.
+- name: retrieves order status
+  operationId: Retrieves Order Status
+  method: GET
+  path: /api/orders/{order_reference}/status
+  description: Retrieves status and next available statuses of a specific order.
+- name: retrieves all orders for org
+  operationId: Retrieves All Orders for Org
+  method: GET
+  path: /api/orders/all
+  description: Retrieves all accessible orders across issuers. Unlike `/api/orders/`, this endpoint does not default to today's date when no dates
+    are passed.
+- name: retrieves wisdom_tree deposit address
+  operationId: Retrieves WisdomTree Deposit Address
+  method: GET
+  path: /api/orders/deposit_address
+  description: Retrieves the WisdomTree deposit address (exchange wallet address) for the authenticated user's organisation, exchange_code, and
+    blockchain.
+- name: retrieve multiple order details
+  operationId: Retrieve Multiple Order Details
+  method: GET
+  path: /api/orders/details/batch
+  description: Retrieves accessible order details in the order of the supplied references. Returns 404 when any reference is missing or inaccessible.
+- name: download orders workbook
+  operationId: Download Orders Workbook
+  method: GET
+  path: /api/orders/export
+  description: Downloads the filtered orders list as an Excel workbook.
+- name: retrieve order details by hash
+  operationId: Retrieve Order Details by Hash
+  method: GET
+  path: /api/orders/hash/{hash}
+  description: Retrieves an accessible order matching conversion_order_hash, deposit_hash, or issuer_order_hash. Returns the same details as the
+    order details endpoint.
+- name: retrieves latest accessible orders
+  operationId: Retrieves Latest Accessible Orders
+  method: GET
+  path: /api/orders/latest
+  description: Retrieves the latest 25 accessible orders across issuers. This endpoint does not default to today's date and includes moderator-visible
+    client orders.
+- name: retrieves wallet address for on receipt order
+  operationId: Retrieves wallet address for on receipt order
+  method: GET
+  path: /api/orders/on-receipt-wallet/
+  description: Retrieves on receipt wallet address for trade type, blockchain, fund, and currency.
+- name: retrieve order mapping
+  operationId: Retrieve Order Mapping
+  method: GET
+  path: /api/orders/order-mapping
+  description: Returns the cached trade mapping data used to render the WT Connect On Receipt and Instant Liquidity pages. Use market_type=primary
+    for On Receipt and market_ty
+- name: retrieve connect portfolio page
+  operationId: Retrieve Connect Portfolio Page
+  method: GET
+  path: /api/orders/portfolio
+  description: Returns holdings for the current organization or a mapped moderator client. A moderator's own portfolio is empty.
+- name: download connect portfolio workbook
+  operationId: Download Connect Portfolio Workbook
+  method: GET
+  path: /api/orders/portfolio/download
+  description: Downloads the same portfolio workbook used by the Connect portfolio page. A moderator's own workbook has no holdings.
+- name: retrieve user initiated order products
+  operationId: Retrieve User Initiated Order Products
+  method: GET
+  path: /api/orders/products
+  description: Returns order products for the user. For moderators selecting a mapped client, returns the client's active subscribed products
+    for issuers the moderator can rea
+- name: review order
+  operationId: Review Order
+  method: POST
+  path: /api/orders/review
+  description: Validates and reviews a WT Connect order before submission. Accepts the same payload as order creation and returns the computed
+    confirm-order details.
+- name: retrieves organization wallet details
+  operationId: Retrieves organization wallet details
+  method: GET
+  path: /api/organizations/{organization_guid}/wallets
+  description: Retrieves wallet details of a specific organization
+- name: creates wallet
+  operationId: Creates Wallet
+  method: POST
+  path: /api/organizations/{organization_guid}/wallets
+  description: Creates a new wallet for an organization in the system.
+- name: approves wallet
+  operationId: Approves Wallet
+  method: PATCH
+  path: /api/organizations/{organization_guid}/wallets/{wallet_guid}
+  description: Allows the user to approve an existing wallet in the system.
+- name: retrieves current user's organization details
+  operationId: Retrieves current user's organization details
+  method: GET
+  path: /api/organizations/me
+  description: Retrieves the details of the organization belonging to the current user. For moderators, will also return client organization details.
+- name: retrieves current user's organization wallets
+  operationId: Retrieves current user's organization wallets
+  method: GET
+  path: /api/organizations/me/wallets
+  description: Retrieves all wallets for the current user's organization, including wallet nickname, wallet address, blockchain, status, and available
+    actions.
+- name: retrieves current user's organization wallet edit details
+  operationId: Retrieves current user's organization wallet edit details
+  method: GET
+  path: /api/organizations/me/wallets/{wallet_guid}/details
+  description: Retrieves the edit metadata for a wallet belonging to the current user's organization. For Moderator users, includes the target
+    client organisation details as a
+- name: updates current user's organization wallet nickname
+  operationId: Updates current user's organization wallet nickname
+  method: PATCH
+  path: /api/organizations/me/wallets/{wallet_guid}/details
+  description: Updates the nickname of a wallet belonging to the current user's organization.
+- name: retrieves current user's organization wallet chains
+  operationId: Retrieves current user's organization wallet chains
+  method: GET
+  path: /api/organizations/me/wallets/chains
+  description: Retrieves the available blockchain chains for wallet creation for the current user's organization. For Moderator users, also returns
+    the available client organi
+- name: download statement file
+  operationId: Download Statement File
+  method: GET
+  path: /api/statements/{statement_id}/download
+  description: Downloads a statement for the current organization or a mapped moderator client.
+- name: retrieve statements
+  operationId: Retrieve Statements
+  method: GET
+  path: /api/statements/list
+  description: Retrieves statements for the current organization or a mapped moderator client.
+- name: list current user api keys
+  operationId: List Current User API Keys
+  method: GET
+  path: /api/users/me/api-keys
+  description: Lists OAuth client credentials owned by the current user.
+- name: create current user api key
+  operationId: Create Current User API Key
+  method: POST
+  path: /api/users/me/api-keys
+  description: Creates a new OAuth client credential owned by the current user. The client_secret is returned only in this response.
+- name: delete current user api key
+  operationId: Delete Current User API Key
+  method: DELETE
+  path: /api/users/me/api-keys/{application_id}
+  description: Deletes an OAuth client credential owned by the current user.

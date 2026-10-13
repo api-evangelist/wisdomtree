@@ -1,0 +1,51 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/wisdomtree-connect-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ErrorResponse
+coverage:
+  operations: 35
+  statuses_declared: 5
+problems:
+- status: 400
+  title: Bad Request
+  description: null
+  operations: 17
+  media_types:
+  - application/json
+  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  schema: ErrorResponse
+- status: 403
+  title: Forbidden
+  description: null
+  operations: 8
+  media_types:
+  - application/json
+  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  schema: ErrorResponse
+- status: 404
+  title: Not Found
+  description: null
+  operations: 19
+  media_types:
+  - application/json
+  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  schema: ErrorResponse
+- status: 409
+  title: Conflict
+  description: null
+  operations: 1
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 502
+  title: Bad Gateway
+  description: null
+  operations: 3
+  media_types:
+  - application/json
+  schema: ErrorResponse

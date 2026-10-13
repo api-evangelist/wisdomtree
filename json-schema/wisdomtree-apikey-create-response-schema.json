@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisdomtree/main/json-schema/wisdomtree-apikey-create-response-schema.json",
+  "title": "APIKeyCreateResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/wisdomtree-connect-openapi.yml#/components/schemas/APIKeyCreateResponse",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "client_id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "client_type": {
+      "enum": [
+        "confidential",
+        "public"
+      ],
+      "type": "string",
+      "description": "* `confidential` - Confidential\n* `public` - Public",
+      "x-spec-enum-id": "6de8a18fd0ba1b55"
+    },
+    "authorization_grant_type": {
+      "enum": [
+        "authorization-code",
+        "implicit",
+        "password",
+        "client-credentials",
+        "openid-hybrid"
+      ],
+      "type": "string",
+      "description": "* `authorization-code` - Authorization code\n* `implicit` - Implicit\n* `password` - Resource owner password-based\n* `client-credentials` - Client credentials\n* `openid-hybrid` - OpenID connect hybrid",
+      "x-spec-enum-id": "22f388741b5d4173"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "client_secret": {
+      "type": "string"
+    },
+    "token_endpoint": {
+      "type": "string"
+    },
+    "grant_type": {
+      "type": "string"
+    },
+    "supported_scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "authorization_grant_type",
+    "client_secret",
+    "client_type",
+    "created",
+    "grant_type",
+    "id",
+    "supported_scopes",
+    "token_endpoint",
+    "updated"
+  ]
+}

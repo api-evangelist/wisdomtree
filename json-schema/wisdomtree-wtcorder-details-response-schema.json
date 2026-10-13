@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisdomtree/main/json-schema/wisdomtree-wtcorder-details-response-schema.json",
+  "title": "WTCOrderDetailsResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/wisdomtree-connect-openapi.yml#/components/schemas/WTCOrderDetailsResponse",
+  "type": "object",
+  "properties": {
+    "order_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "issuer": {
+      "type": "string",
+      "readOnly": true
+    },
+    "exchange_code": {
+      "type": "string",
+      "readOnly": true
+    },
+    "quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$",
+      "description": "Purchase: dollar amount. Sale: token/share quantity."
+    },
+    "token_amount": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$"
+    },
+    "expected_settlement_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Expected settlement date supplied by WisdomTree; pending until provided. UTC timestamp (ISO-8601 format)."
+    },
+    "trade_type": {
+      "type": "string",
+      "description": "Allowed: 'Purchase', 'Sale'."
+    },
+    "order_type": {
+      "type": "string",
+      "description": "Market type. Defaults to 'primary' unless explicitly set to 'secondary'."
+    },
+    "settlement_currency": {
+      "type": "string"
+    },
+    "settlement_currency_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "bank_details": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/OrderReviewBankDetails"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true
+    },
+    "blockchain": {
+      "type": "string"
+    },
+    "token_contract_address": {
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "settlement_wallet_address": {
+      "type": "string",
+      "readOnly": true
+    },
+    "wisdomtree_deposit_wallet_address": {
+      "type": "string",
+      "readOnly": true
+    },
+    "wisdomtree_deposit_wallet_address_qrcode": {
+      "type": "string",
+      "readOnly": true
+    },
+    "gross_value": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$",
+      "readOnly": true
+    },
+    "net_value": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$",
+      "readOnly": true
+    },
+    "transaction_fee": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$"
+    },
+    "network_fee": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$"
+    },
+    "execution_cost_fee": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,2}(?:\\.\\d{0,7})?$"
+    },
+    "rate": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,22}(?:\\.\\d{0,8})?$"
+    },
+    "conversion_order_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "deposit_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "issuer_order_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "user": {
+      "type": "string",
+      "readOnly": true
+    },
+    "org": {
+      "type": "string",
+      "readOnly": true
+    },
+    "organisation": {
+      "type": "string",
+      "readOnly": true
+    },
+    "org_address": {
+      "type": "string",
+      "readOnly": true
+    },
+    "created_on": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "notes": {
+      "type": "string",
+      "readOnly": true
+    },
+    "status_log": {
+      "type": "string",
+      "readOnly": true
+    },
+    "status": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "bank_details",
+    "blockchain",
+    "created_on",
+    "exchange_code",
+    "gross_value",
+    "issuer",
+    "net_value",
+    "notes",
+    "org",
+    "org_address",
+    "organisation",
+    "product_name",
+    "quantity",
+    "settlement_currency",
+    "settlement_currency_name",
+    "settlement_wallet_address",
+    "status",
+    "status_log",
+    "token_contract_address",
+    "trade_type",
+    "user",
+    "wisdomtree_deposit_wallet_address",
+    "wisdomtree_deposit_wallet_address_qrcode"
+  ],
+  "$defs": {
+    "OrderReviewBankDetails": {
+      "type": "object",
+      "properties": {
+        "beneficiary_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "beneficiary_account_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "beneficiary_address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "routing_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bank_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "swift_or_bic": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "bank_name",
+        "beneficiary_account_number",
+        "beneficiary_address",
+        "beneficiary_name",
+        "routing_number",
+        "swift_or_bic"
+      ]
+    }
+  }
+}

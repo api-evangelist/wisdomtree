@@ -1,0 +1,71 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 5
+  own: 3
+  other_domain: 2
+  platform: 0
+  roles:
+  - api
+  - other
+  - portal
+  - website
+hosts:
+- host: api.wisdomtree.com
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  title: Your Azure Function App is up and running.
+  status: 200
+  registrable_domain: wisdomtree.com
+  role: api
+  relation: own
+- host: app.wisdomtreeconnect.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: wisdomtreeconnect.com
+  role: other
+  relation: other-domain
+- host: dataspanapi.wisdomtree.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: wisdomtree.com
+  role: other
+  relation: own
+- host: docs.wisdomtreeconnect.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - Documentation
+  - DeveloperPortal
+  serves:
+  - docs
+  registrable_domain: wisdomtreeconnect.com
+  role: portal
+  relation: other-domain
+- host: www.wisdomtree.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  serves: []
+  registrable_domain: wisdomtree.com
+  role: website
+  relation: own

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisdomtree/main/json-schema/wisdomtree-wtc-schema.json",
+  "title": "WTC",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/wisdomtree-connect-openapi.yml#/components/schemas/WTC",
+  "type": "object",
+  "properties": {
+    "exchange_code": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$",
+      "description": "Purchase: dollar amount. Sale: token/share quantity."
+    },
+    "trade_type": {
+      "type": "string",
+      "description": "Allowed: 'Purchase', 'Sale'."
+    },
+    "order_type": {
+      "type": "string",
+      "description": "Market type. Defaults to 'primary' unless explicitly set to 'secondary'."
+    },
+    "settlement_currency": {
+      "type": "string"
+    },
+    "blockchain": {
+      "type": "string"
+    },
+    "settlement_wallet": {
+      "type": "string",
+      "writeOnly": true
+    },
+    "wisdomtree_deposit_wallet": {
+      "type": "string",
+      "description": "Required for only WTGXX_USDC."
+    },
+    "organization_guid": {
+      "type": "string",
+      "format": "uuid",
+      "writeOnly": true,
+      "description": "Required only for Moderator users. Must be the client organization GUID."
+    },
+    "conversion_order_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "deposit_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "issuer_order_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    }
+  },
+  "required": [
+    "blockchain",
+    "exchange_code",
+    "quantity",
+    "settlement_currency",
+    "settlement_wallet",
+    "trade_type"
+  ]
+}

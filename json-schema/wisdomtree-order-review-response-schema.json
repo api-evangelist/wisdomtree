@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisdomtree/main/json-schema/wisdomtree-order-review-response-schema.json",
+  "title": "OrderReviewResponse",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/wisdomtree-connect-openapi.yml#/components/schemas/OrderReviewResponse",
+  "type": "object",
+  "properties": {
+    "bank_details": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/OrderReviewBankDetails"
+        }
+      ],
+      "nullable": true
+    },
+    "blockchain": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "can_trade": {
+      "type": "boolean"
+    },
+    "client_settlement_wallet_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "client_settlement_wallet_qrcode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "conversion_fee": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "exchange_code": {
+      "type": "string"
+    },
+    "expected_settlement_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gross_value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$"
+    },
+    "gross_value_label": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "net_value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$"
+    },
+    "net_value_label": {
+      "type": "string"
+    },
+    "network_fee": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "order_date": {
+      "type": "string"
+    },
+    "payload": {},
+    "product_name": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$"
+    },
+    "quantity_label": {
+      "type": "string"
+    },
+    "rate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal",
+      "pattern": "^-?\\d{0,20}(?:\\.\\d{0,18})?$"
+    },
+    "settlement_currency": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "settlement_text": {
+      "type": "string"
+    },
+    "submit_endpoint": {
+      "type": "string"
+    },
+    "token_contract_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "trade_type": {
+      "type": "string"
+    },
+    "transaction_fee": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transaction_fee_label": {
+      "type": "string"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "wisdomtree_deposit_wallet_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "wisdomtree_deposit_wallet_qrcode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "blockchain",
+    "can_trade",
+    "client_settlement_wallet_address",
+    "client_settlement_wallet_qrcode",
+    "conversion_fee",
+    "exchange_code",
+    "expected_settlement_date",
+    "gross_value",
+    "gross_value_label",
+    "issuer",
+    "net_value",
+    "net_value_label",
+    "network_fee",
+    "order_date",
+    "payload",
+    "product_name",
+    "quantity",
+    "quantity_label",
+    "settlement_currency",
+    "settlement_text",
+    "submit_endpoint",
+    "token_contract_address",
+    "trade_type",
+    "transaction_fee",
+    "transaction_fee_label",
+    "wisdomtree_deposit_wallet_address",
+    "wisdomtree_deposit_wallet_qrcode"
+  ],
+  "$defs": {
+    "OrderReviewBankDetails": {
+      "type": "object",
+      "properties": {
+        "beneficiary_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "beneficiary_account_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "beneficiary_address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "routing_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bank_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "swift_or_bic": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "bank_name",
+        "beneficiary_account_number",
+        "beneficiary_address",
+        "beneficiary_name",
+        "routing_number",
+        "swift_or_bic"
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisdomtree/main/json-schema/wisdomtree-dividend-payment-preference-detail-schema.json",
+  "title": "DividendPaymentPreferenceDetail",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/wisdomtree-connect-openapi.yml#/components/schemas/DividendPaymentPreferenceDetail",
+  "type": "object",
+  "properties": {
+    "dividend_mapping_id": {
+      "type": "integer"
+    },
+    "token_id": {
+      "type": "integer"
+    },
+    "organisation_id": {
+      "type": "integer"
+    },
+    "asset_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_symbol": {
+      "type": "string"
+    },
+    "block_chain": {
+      "type": "string"
+    },
+    "dividend_payment_currency": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dividend_payment_currency_label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "field_details": {
+      "type": "object",
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "asset_name",
+    "asset_symbol",
+    "block_chain",
+    "dividend_mapping_id",
+    "dividend_payment_currency",
+    "dividend_payment_currency_label",
+    "field_details",
+    "organisation_id",
+    "token_id"
+  ]
+}

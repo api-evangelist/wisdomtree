@@ -1,23 +1,129 @@
 aid: wisdomtree
+
 name: WisdomTree
-description: 'WisdomTree is a company surfaced via the API Evangelist harvest backlog (source: market-gap:crypto-exchanges(NYDFS))
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: WisdomTree is a global asset manager issuing ETFs and tokenized funds. Through WisdomTree Connect it offers an OAuth2-secured REST
+  API for institutions to create subscription and redemption orders, manage wallets and track settlement of regulated tokenized assets, plus a
+  DataSpan Fund Data API for NAV, aggregates, accruals and shares outstanding per fund ticker.
+
 url: https://raw.githubusercontent.com/api-evangelist/wisdomtree/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:market-gap:crypto-exchanges(NYDFS)
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+
+x-tier-reason: enrichment pass 2026-10-14 (local-v5; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-13'
-modified: '2026-10-13'
+
+modified: '2026-10-14'
+
 tags:
 - Company
-apis: []
+- Asset Management
+- ETFs
+- Tokenization
+- Tokenized Funds
+- Financial Services
+- Fund Data
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/wisdomtree-agentic-access.yml
+- type: Spectral
+  url: rules/wisdomtree-rules.yml
+- type: JSONLD
+  url: json-ld/wisdomtree-context.jsonld
+- type: Vocabulary
+  url: vocabulary/wisdomtree-vocabulary.yml
+- type: DataModel
+  url: data-model/wisdomtree-data-model.yml
+- type: Idempotency
+  url: conventions/wisdomtree-conventions.yml
+- type: Conventions
+  url: conventions/wisdomtree-conventions.yml
+- type: ErrorCatalog
+  url: errors/wisdomtree-problem-types.yml
+- type: Conformance
+  url: conformance/wisdomtree-conformance.yml
+- type: Hosts
+  url: hosts/wisdomtree-hosts.yml
+- type: Vendors
+  url: vendors/wisdomtree-vendors.yml
+- type: OAuthScopes
+  url: scopes/wisdomtree-scopes.yml
+- type: Authentication
+  url: authentication/wisdomtree-authentication.yml
+- type: DomainSecurity
+  url: security/wisdomtree-domain-security.yml
 - type: Website
   url: https://www.wisdomtree.com
+- type: Documentation
+  url: https://docs.wisdomtreeconnect.com/
+- type: DeveloperPortal
+  url: https://docs.wisdomtreeconnect.com/
+
+apis:
+- aid: wisdomtree:wisdomtree-connect-api
+  name: WisdomTree Connect API
+  description: REST API for WisdomTree Connect, the tokenized-fund platform. Organizations, wallets, assets and orders (subscriptions as trade_type
+    Purchase, redemptions as Sale), authenticated with an OAuth2 password grant at POST /o/token/. Separate sandbox environment with its own credentials.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Tokenized Funds
+  - Orders
+  - Wallets
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-connect-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://docs.wisdomtreeconnect.com/openapi/connect.openapi.yaml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-dataspan-fund-data-api
+  name: WisdomTree DataSpan Fund Data API
+  description: Read-only fund data API returning NAV, daily aggregates and historical metrics, open accruals, shares outstanding and aggregates
+    per supported WisdomTree fund ticker. Requires the x-wt-dataspan-key header. No published contract; the local OpenAPI is generated from the
+    provider's structured documentation and marked as such.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://dataspanapi.wisdomtree.com
+  tags:
+  - Fund Data
+  - NAV
+  properties:
+  - type: OpenAPI
+    url: openapi/_ae-authored/wisdomtree-dataspan-openapi-generated.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+
+x-enrichment:
+  date: '2026-10-14'
+  status: enriched
+  artifacts_added: 27
+  pass: local-v5

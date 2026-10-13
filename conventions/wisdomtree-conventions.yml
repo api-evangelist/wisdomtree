@@ -1,0 +1,12 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-conformance.py
+source: openapi/ (1 document(s), 10 mutating operations)
+idempotency:
+  coverage: partial
+  header: Idempotency-Key
+  scope:
+  - POST /api/orders/
+  mechanism: request header / body token declared in the OpenAPI
+  evidence: Idempotency-Key on 1 of 10 mutating operations
+  verified: derived
