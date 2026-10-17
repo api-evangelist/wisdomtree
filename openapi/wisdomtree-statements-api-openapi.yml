@@ -1,0 +1,142 @@
+openapi: 3.2.0
+info:
+  title: Wisdomtree Statements API
+  version: 1.0.0
+  x-refined-note:
+  - x-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged Statements across 2 of this provider''s published API definitions: connect.openapi.yaml, wisdomtree-connect-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://app.wisdomtreeconnect.com
+  description: Production (per docs.wisdomtreeconnect.com/llms.txt)
+- url: https://api.sandbox.wisdomtreeconnect.com
+  description: Sandbox (per docs.wisdomtreeconnect.com/llms.txt)
+tags:
+- name: Statements
+paths:
+  /api/statements/{statement_id}/download:
+    get:
+      operationId: DownloadStatementFile
+      description: Downloads a statement for the current organization or a mapped moderator client.
+      parameters:
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: Mapped client GUID for moderators.
+      - in: path
+        name: statement_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - Statements
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          description: Statement file download
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Download statement file
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Download Statement File
+  /api/statements/list:
+    get:
+      operationId: RetrieveStatements
+      description: Retrieves statements for the current organization or a mapped moderator client.
+      parameters:
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: Mapped client GUID for moderators.
+      tags:
+      - Statements
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatementListItem'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieve statements
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Statements
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+      - error
+    StatementListItem:
+      type: object
+      properties:
+        statement_id:
+          type: integer
+        period_start:
+          type: string
+        period_end:
+          type: string
+        document:
+          type: string
+        filename:
+          type: string
+          readOnly: true
+        download_url:
+          type: string
+          readOnly: true
+      required:
+      - document
+      - download_url
+      - filename
+      - period_end
+      - period_start
+      - statement_id
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+          scopes:
+            read: Read scope
+            write: Write scope
+            groups: Access to your groups
+x-refined-from:
+- connect.openapi.yaml
+- wisdomtree-connect-openapi.yml

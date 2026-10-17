@@ -74,22 +74,16 @@ common:
   url: https://docs.wisdomtreeconnect.com/
 
 apis:
-- aid: wisdomtree:wisdomtree-connect-api
-  name: WisdomTree Connect API
-  description: REST API for WisdomTree Connect, the tokenized-fund platform. Organizations, wallets, assets and orders (subscriptions as trade_type
-    Purchase, redemptions as Sale), authenticated with an OAuth2 password grant at POST /o/token/. Separate sandbox environment with its own credentials.
+- aid: wisdomtree:wisdomtree-accruals-api
+  name: WisdomTree Accruals API
+  description: The Accruals API from WisdomTree — 1 operation(s) for accruals.
   humanURL: https://docs.wisdomtreeconnect.com/
   baseURL: https://app.wisdomtreeconnect.com
   tags:
-  - Tokenized Funds
-  - Orders
-  - Wallets
+  - Accruals
   properties:
   - type: OpenAPI
-    url: openapi/wisdomtree-connect-openapi.yml
-  - type: OpenAPI
-    name: OpenAPI (provider-hosted)
-    url: https://docs.wisdomtreeconnect.com/openapi/connect.openapi.yaml
+    url: openapi/wisdomtree-accruals-api-openapi.yml
   - type: Documentation
     url: https://docs.wisdomtreeconnect.com/
   - type: GettingStarted
@@ -106,22 +100,189 @@ apis:
     url: json-schema/wisdomtree-wtc-schema.json
   - type: JSONSchema
     url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
-- aid: wisdomtree:wisdomtree-dataspan-fund-data-api
-  name: WisdomTree DataSpan Fund Data API
-  description: Read-only fund data API returning NAV, daily aggregates and historical metrics, open accruals, shares outstanding and aggregates
-    per supported WisdomTree fund ticker. Requires the x-wt-dataspan-key header. No published contract; the local OpenAPI is generated from the
-    provider's structured documentation and marked as such.
+- aid: wisdomtree:wisdomtree-dividend-payment-preferences-api
+  name: WisdomTree Dividend Payment Preferences API
+  description: >-
+    The Dividend Payment Preferences API from WisdomTree — 4 operation(s) for dividend payment preferences.
   humanURL: https://docs.wisdomtreeconnect.com/
-  baseURL: https://dataspanapi.wisdomtree.com
+  baseURL: https://app.wisdomtreeconnect.com
   tags:
-  - Fund Data
-  - NAV
+  - Dividend Payment Preferences
   properties:
   - type: OpenAPI
-    url: openapi/_ae-authored/wisdomtree-dataspan-openapi-generated.yml
+    url: openapi/wisdomtree-dividend-payment-preferences-api-openapi.yml
   - type: Documentation
     url: https://docs.wisdomtreeconnect.com/
-
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-fund-data-api
+  name: WisdomTree Fund Data API
+  description: WisdomTree DataSpan fund NAV, aggregates and accrual data.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Fund Data
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-fund-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-orders-api
+  name: WisdomTree Orders API
+  description: The Orders API from WisdomTree — 17 operation(s) for orders.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-organizations-api
+  name: WisdomTree Organizations API
+  description: The Organizations API from WisdomTree — 1 operation(s) for organizations.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-statements-api
+  name: WisdomTree Statements API
+  description: The Statements API from WisdomTree — 2 operation(s) for statements.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-statements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-users-api
+  name: WisdomTree Users API
+  description: The Users API from WisdomTree — 2 operation(s) for users.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
+- aid: wisdomtree:wisdomtree-wallets-api
+  name: WisdomTree Wallets API
+  description: The Wallets API from WisdomTree — 5 operation(s) for wallets.
+  humanURL: https://docs.wisdomtreeconnect.com/
+  baseURL: https://app.wisdomtreeconnect.com
+  tags:
+  - Wallets
+  properties:
+  - type: OpenAPI
+    url: openapi/wisdomtree-wallets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wisdomtreeconnect.com/
+  - type: GettingStarted
+    url: https://docs.wisdomtreeconnect.com/guides/direct-org.md
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtcorder-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-review-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-order-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-apikey-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-wtc-schema.json
+  - type: JSONSchema
+    url: json-schema/wisdomtree-dividend-payment-preference-detail-schema.json
 x-enrichment:
   date: '2026-10-14'
   status: enriched

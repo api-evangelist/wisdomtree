@@ -1,0 +1,1733 @@
+openapi: 3.2.0
+info:
+  title: Wisdomtree Orders API
+  version: 1.0.0
+  x-refined-note:
+  - x-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged Orders across 2 of this provider''s published API definitions: connect.openapi.yaml, wisdomtree-connect-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://app.wisdomtreeconnect.com
+  description: Production (per docs.wisdomtreeconnect.com/llms.txt)
+- url: https://api.sandbox.wisdomtreeconnect.com
+  description: Sandbox (per docs.wisdomtreeconnect.com/llms.txt)
+tags:
+- name: Orders
+paths:
+  /api/orders/:
+    post:
+      operationId: CreateOrder
+      description: Creates a new order. Schema depends on issuer_name.
+      parameters:
+      - in: header
+        name: Idempotency-Key
+        schema:
+          type: string
+        description: Optional key to make order creation idempotent. Reusing the same key with the same payload replays the original success response.
+      tags:
+      - Orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+            examples:
+              WTGXX-USD:
+                value:
+                  exchange_code: WTGXX
+                  quantity: 10000.345
+                  trade_type: Sale
+                  settlement_currency: USD
+                  blockchain: Ethereum Sepolia
+                  settlement_wallet: '0x0000000000000000000000000000000000000000'
+              WTGXX-USDC:
+                value:
+                  exchange_code: WTGXX
+                  quantity: 10000.345
+                  trade_type: Sale
+                  settlement_currency: USDC
+                  blockchain: Ethereum Sepolia
+                  settlement_wallet: '0x0000000000000000000000000000000000000000'
+                  wisdomtree_deposit_wallet: '0x1000000000000000000000000000000000000000'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      security:
+      - oauth2:
+        - write
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                Response:
+                  value:
+                    message: 'Order #order number created successfully'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCreateError'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Create order
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Order
+  /api/orders/{order_reference}:
+    get:
+      operationId: RetrievesOrderDetails
+      description: Retrieves details of a specific order.
+      parameters:
+      - in: path
+        name: order_reference
+        schema:
+          type: string
+        required: true
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WTCOrderDetailsResponse'
+              examples:
+                WTGXX-USD:
+                  value:
+                    order_reference: 5a305244015843c6283a
+                    order_date: '1900-01-01'
+                    exchange_code: WTGXX
+                    quantity: 10000.345
+                    expected_settlement_date: '1900-01-01'
+                    trade_type: Sale
+                    settlement_currency: USD
+                    blockchain: Ethereum Sepolia
+                    token_contract_address: '0x0000000000000000000000000000000000000000'
+                    settlement_wallet_address: '0x0000000000000000000000000000000000000000'
+                    gross_value: '10000.00000000'
+                    net_value: '10000.00000000'
+                    transaction_fee: '0.00000000'
+                    network_fee: '0.00000000'
+                    rate: '1.00000000'
+                    user: user
+                    org: org
+                    status: status
+                WTGXX-USDC:
+                  value:
+                    order_reference: 5a305244015843c61111
+                    order_date: '1900-01-01'
+                    exchange_code: WTGXX
+                    quantity: 10000.345
+                    expected_settlement_date: '1900-01-01'
+                    trade_type: Sale
+                    settlement_currency: USDC
+                    blockchain: Ethereum Sepolia
+                    token_contract_address: '0x0000000000000000000000000000000000000000'
+                    settlement_wallet_address: '0x0000000000000000000000000000000000000000'
+                    wisdomtree_deposit_wallet_address: '0x1000000000000000000000000000000000000000'
+                    gross_value: '10000.00000000'
+                    net_value: '10000.00000000'
+                    transaction_fee: '0.00000000'
+                    network_fee: '0.00000000'
+                    rate: '1.00000000'
+                    user: user
+                    org: org
+                    status: status
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieves order details
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves Order Details
+  /api/orders/{order_reference}/fetch-hash:
+    post:
+      operationId: FetchMissingOrderHashes
+      description: Fetches missing conversion, deposit, and issuer transaction hashes for a settled, accessible order and returns the stored hashes. USD orders use only the issuer hash. Values can remain null until a hash is available. No request body is required.
+      parameters:
+      - in: path
+        name: order_reference
+        schema:
+          type: string
+        required: true
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderHashesResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '502':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Fetch missing order hashes
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Fetch Missing Order Hashes
+  /api/orders/{order_reference}/notes:
+    post:
+      operationId: CreateOrderNote
+      description: Creates a comment note for a specific order.
+      parameters:
+      - in: path
+        name: order_reference
+        schema:
+          type: string
+        required: true
+      tags:
+      - Orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderNote'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateOrderNote'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateOrderNote'
+        required: true
+      security:
+      - oauth2:
+        - write
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderNoteResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Create order note
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Order Note
+  /api/orders/{order_reference}/status:
+    get:
+      operationId: RetrievesOrderStatus
+      description: Retrieves status and next available statuses of a specific order.
+      parameters:
+      - in: path
+        name: order_reference
+        schema:
+          type: string
+        required: true
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatus'
+          description: ''
+      summary: Retrieves order status
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves Order Status
+  /api/orders/all:
+    get:
+      operationId: RetrievesAllOrdersForOrg
+      description: Retrieves all accessible orders across issuers. Unlike `/api/orders/`, this endpoint does not default to today's date when no dates are passed.
+      parameters:
+      - in: query
+        name: end_date
+        schema:
+          type: string
+          format: date
+        description: End date (YYYY-MM-DD).
+      - in: query
+        name: start_date
+        schema:
+          type: string
+          format: date
+        description: Start date (YYYY-MM-DD).
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+          description: ''
+      summary: Retrieves all orders for org
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves All Orders for Org
+  /api/orders/deposit_address:
+    get:
+      operationId: RetrievesWisdomTreeDepositAddress
+      description: Retrieves the WisdomTree deposit address (exchange wallet address) for the authenticated user's organisation, exchange_code, and blockchain.
+      parameters:
+      - in: query
+        name: blockchain
+        schema:
+          type: string
+        description: Blockchain name, for example `Base Testnet Sepolia`.
+        required: true
+      - in: query
+        name: exchange_code
+        schema:
+          type: string
+        description: Fund exchange code, for example `WTGXX`.
+        required: true
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: Optional for moderator users. When provided, resolves the deposit address for a mapped client organization; otherwise the moderator's own organization is used.
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositAddressResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '502':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieves wisdom tree deposit address
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves WisdomTree Deposit Address
+  /api/orders/details/batch:
+    get:
+      operationId: RetrieveMultipleOrderDetails
+      description: Retrieves accessible order details in the order of the supplied references. Returns 404 when any reference is missing or inaccessible.
+      parameters:
+      - in: query
+        name: order_references
+        schema:
+          type: array
+          items:
+            type: string
+        description: Comma-separated order references, up to 100 references.
+        required: true
+        explode: false
+        style: form
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WTCOrderDetailsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldErrorResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieve multiple order details
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Multiple Order Details
+  /api/orders/export:
+    get:
+      operationId: DownloadOrdersWorkbook
+      description: Downloads the filtered orders list as an Excel workbook.
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          description: Orders workbook (.xlsx)
+        '400':
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Download orders workbook
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Download Orders Workbook
+  /api/orders/hash/{hash}:
+    get:
+      operationId: RetrieveOrderDetailsByHash
+      description: Retrieves an accessible order matching conversion_order_hash, deposit_hash, or issuer_order_hash. Returns the same details as the order details endpoint.
+      parameters:
+      - in: path
+        name: hash
+        schema:
+          type: string
+        required: true
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WTCOrderDetailsResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieve order details by hash
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Order Details by Hash
+  /api/orders/latest:
+    get:
+      operationId: RetrievesLatestAccessibleOrders
+      description: Retrieves the latest 25 accessible orders across issuers. This endpoint does not default to today's date and includes moderator-visible client orders.
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestOrdersResponse'
+          description: ''
+      summary: Retrieves latest accessible orders
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves Latest Accessible Orders
+  /api/orders/on-receipt-wallet/:
+    get:
+      operationId: RetrievesWalletAddressForOnReceiptOrder
+      description: Retrieves on receipt wallet address for trade type, blockchain, fund, and currency.
+      parameters:
+      - in: query
+        name: blockchain
+        schema:
+          type: string
+        description: Blockchain name.
+        required: true
+      - in: query
+        name: currency
+        schema:
+          type: string
+        description: Stablecoin currency symbol.
+        required: true
+      - in: query
+        name: fund
+        schema:
+          type: string
+        description: Fund ticker (order token asset ticker).
+        required: true
+      - in: query
+        name: trade_type
+        schema:
+          type: string
+        description: 'Trade type: Purchase or Sale.'
+        required: true
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnReceiptWallet'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '502':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieves wallet address for on receipt order
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves wallet address for on receipt order
+  /api/orders/order-mapping:
+    get:
+      operationId: RetrieveOrderMapping
+      description: Returns the cached trade mapping data used to render the WT Connect On Receipt and Instant Liquidity pages. Use market_type=primary for On Receipt and market_type=secondary for Instant Liquidity.
+      parameters:
+      - in: query
+        name: market_type
+        schema:
+          type: string
+        description: Use 'primary' for On Receipt or 'secondary' for Instant Liquidity.
+        required: true
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuickMarketMappingResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieve order mapping
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Order Mapping
+  /api/orders/portfolio:
+    get:
+      operationId: RetrieveConnectPortfolioPage
+      description: Returns holdings for the current organization or a mapped moderator client. A moderator's own portfolio is empty.
+      parameters:
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: Mapped client GUID for moderators.
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioPageResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieve connect portfolio page
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Connect Portfolio Page
+  /api/orders/portfolio/download:
+    get:
+      operationId: DownloadConnectPortfolioWorkbook
+      description: Downloads the same portfolio workbook used by the Connect portfolio page. A moderator's own workbook has no holdings.
+      parameters:
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: Mapped client GUID for moderators.
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          description: Portfolio workbook (.xlsx)
+        '400':
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '403':
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Download connect portfolio workbook
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Download Connect Portfolio Workbook
+  /api/orders/products:
+    get:
+      operationId: RetrieveUserInitiatedOrderProducts
+      description: Returns order products for the user. For moderators selecting a mapped client, returns the client's active subscribed products for issuers the moderator can read and input; permitted products can always be traded regardless of trading hours. If exchange_code is provided, the response also includes the current backend-driven form fields for that product using the query params passed in.
+      parameters:
+      - in: query
+        name: blockchain
+        schema:
+          type: string
+        description: Optional current blockchain for dynamic form resolution.
+      - in: query
+        name: exchange_code
+        schema:
+          type: string
+        description: Selected product exchange code.
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: Optional mapped moderator client GUID used to scope products, wallets, and related form data.
+      - in: query
+        name: settlement_currency
+        schema:
+          type: string
+        description: Optional current settlement currency for dynamic form resolution.
+      - in: query
+        name: trade_type
+        schema:
+          type: string
+        description: Optional current trade type for dynamic form resolution.
+      tags:
+      - Orders
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderProductSelectionResponse'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieve user initiated order products
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve User Initiated Order Products
+  /api/orders/review:
+    post:
+      operationId: ReviewOrder
+      description: Validates and reviews a WT Connect order before submission. Accepts the same payload as order creation and returns the computed confirm-order details.
+      tags:
+      - Orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WTC'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WTC'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WTC'
+        required: true
+      security:
+      - oauth2:
+        - write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderReviewResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderReviewError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Review order
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Review Order
+components:
+  schemas:
+    OrderReviewBankDetails:
+      type: object
+      properties:
+        beneficiary_name:
+          type:
+          - string
+          - 'null'
+        beneficiary_account_number:
+          type:
+          - string
+          - 'null'
+        beneficiary_address:
+          type:
+          - string
+          - 'null'
+        routing_number:
+          type:
+          - string
+          - 'null'
+        bank_name:
+          type:
+          - string
+          - 'null'
+        swift_or_bic:
+          type:
+          - string
+          - 'null'
+      required:
+      - bank_name
+      - beneficiary_account_number
+      - beneficiary_address
+      - beneficiary_name
+      - routing_number
+      - swift_or_bic
+    LatestOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/LatestOrder'
+        issuers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LatestOrdersIssuer'
+        can_create_order:
+          type: boolean
+        can_view_wallets:
+          type: boolean
+        can_create_wallet:
+          type: boolean
+      required:
+      - can_create_order
+      - can_create_wallet
+      - can_view_wallets
+      - issuers
+      - orders
+    QuickMarketMappingResponse:
+      type: object
+      properties:
+        trade_details: {}
+        trade_icons: {}
+      required:
+      - trade_details
+      - trade_icons
+    Order:
+      type: object
+      properties:
+        trade_type:
+          type: string
+          description: 'Allowed: ''Purchase'', ''Sale''.'
+        user:
+          type: string
+        org:
+          type: string
+        status:
+          type: string
+          readOnly: true
+        expected_settlement_date:
+          type: string
+          format: date-time
+          description: UTC timestamp (inclusive, ISO-8601 format)
+        exchange_code:
+          type: string
+        issuer:
+          type: string
+        blockchain:
+          type: string
+          readOnly: true
+        settlement_currency:
+          type: string
+          readOnly: true
+        order_type:
+          type: string
+          readOnly: true
+        dollar_amount:
+          type: string
+          readOnly: true
+        token_amount:
+          type: string
+          readOnly: true
+        gross_value:
+          type: string
+          readOnly: true
+        net_value:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        transaction_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        execution_cost_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        order_reference:
+          type: string
+          maxLength: 20
+        order_date:
+          type: string
+          format: date
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+      required:
+      - blockchain
+      - dollar_amount
+      - exchange_code
+      - execution_cost_fee
+      - gross_value
+      - issuer
+      - net_value
+      - order_type
+      - org
+      - quantity
+      - settlement_currency
+      - status
+      - token_amount
+      - trade_type
+      - transaction_fee
+      - user
+    WTC:
+      type: object
+      properties:
+        exchange_code:
+          type: string
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+          description: 'Purchase: dollar amount. Sale: token/share quantity.'
+        trade_type:
+          type: string
+          description: 'Allowed: ''Purchase'', ''Sale''.'
+        order_type:
+          type: string
+          description: Market type. Defaults to 'primary' unless explicitly set to 'secondary'.
+        settlement_currency:
+          type: string
+        blockchain:
+          type: string
+        settlement_wallet:
+          type: string
+          writeOnly: true
+        wisdomtree_deposit_wallet:
+          type: string
+          description: Required for only WTGXX_USDC.
+        organization_guid:
+          type: string
+          format: uuid
+          writeOnly: true
+          description: Required only for Moderator users. Must be the client organization GUID.
+        conversion_order_hash:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        deposit_hash:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        issuer_order_hash:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+      required:
+      - blockchain
+      - exchange_code
+      - quantity
+      - settlement_currency
+      - settlement_wallet
+      - trade_type
+    PortfolioPageResponse:
+      type: object
+      properties:
+        total_balance:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        recent_change:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        change_status:
+          type: string
+          readOnly: true
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortfolioAsset'
+          readOnly: true
+      required:
+      - assets
+      - change_status
+      - recent_change
+      - total_balance
+    OrderNoteResponse:
+      type: object
+      properties:
+        comment:
+          type:
+          - string
+          - 'null'
+        created_by:
+          type: string
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+      required:
+      - created_by
+    OrderCreateError:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/FieldErrorResponse'
+    OrderReviewResponse:
+      type: object
+      properties:
+        bank_details:
+          allOf:
+          - $ref: '#/components/schemas/OrderReviewBankDetails'
+        blockchain:
+          type:
+          - string
+          - 'null'
+        can_trade:
+          type: boolean
+        client_settlement_wallet_address:
+          type:
+          - string
+          - 'null'
+        client_settlement_wallet_qrcode:
+          type:
+          - string
+          - 'null'
+        conversion_fee:
+          type:
+          - string
+          - 'null'
+        exchange_code:
+          type: string
+        expected_settlement_date:
+          type:
+          - string
+          - 'null'
+        gross_value:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+        gross_value_label:
+          type: string
+        issuer:
+          type: string
+        net_value:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+        net_value_label:
+          type: string
+        network_fee:
+          type:
+          - string
+          - 'null'
+        order_date:
+          type: string
+        payload: {}
+        product_name:
+          type: string
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+        quantity_label:
+          type: string
+        rate:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+        settlement_currency:
+          type:
+          - string
+          - 'null'
+        settlement_text:
+          type: string
+        submit_endpoint:
+          type: string
+        token_contract_address:
+          type:
+          - string
+          - 'null'
+        trade_type:
+          type: string
+        transaction_fee:
+          type:
+          - string
+          - 'null'
+        transaction_fee_label:
+          type: string
+        warnings:
+          type: array
+          items:
+            type: string
+        wisdomtree_deposit_wallet_address:
+          type:
+          - string
+          - 'null'
+        wisdomtree_deposit_wallet_qrcode:
+          type:
+          - string
+          - 'null'
+      required:
+      - blockchain
+      - can_trade
+      - client_settlement_wallet_address
+      - client_settlement_wallet_qrcode
+      - conversion_fee
+      - exchange_code
+      - expected_settlement_date
+      - gross_value
+      - gross_value_label
+      - issuer
+      - net_value
+      - net_value_label
+      - network_fee
+      - order_date
+      - payload
+      - product_name
+      - quantity
+      - quantity_label
+      - settlement_currency
+      - settlement_text
+      - submit_endpoint
+      - token_contract_address
+      - trade_type
+      - transaction_fee
+      - transaction_fee_label
+      - wisdomtree_deposit_wallet_address
+      - wisdomtree_deposit_wallet_qrcode
+    OrderProductSelectionField:
+      type: object
+      properties:
+        name:
+          type: string
+        label:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+        required:
+          type: boolean
+        hidden:
+          type: boolean
+        read_only:
+          type: boolean
+        help_text:
+          type:
+          - string
+          - 'null'
+        value: {}
+        placeholder:
+          type:
+          - string
+          - 'null'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderProductSelectionFieldChoice'
+      required:
+      - help_text
+      - hidden
+      - label
+      - name
+      - placeholder
+      - read_only
+      - required
+      - type
+    OnReceiptWallet:
+      type: object
+      properties:
+        trade_type:
+          type: string
+        blockchain:
+          type: string
+        fund:
+          type: string
+        currency:
+          type: string
+        wallet_address:
+          type: string
+          readOnly: true
+      required:
+      - blockchain
+      - currency
+      - fund
+      - trade_type
+      - wallet_address
+    OrderProductSelectionProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        exchange_code:
+          type: string
+        issuer:
+          type: string
+        can_trade:
+          type: boolean
+      required:
+      - can_trade
+      - exchange_code
+      - id
+      - issuer
+      - name
+    OrderStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          readOnly: true
+        next_status:
+          type: string
+          readOnly: true
+      required:
+      - next_status
+      - status
+    CreateOrderNote:
+      type: object
+      properties:
+        comment:
+          type:
+          - string
+          - 'null'
+      required:
+      - comment
+    PortfolioWallet:
+      type: object
+      properties:
+        wallet_id:
+          type: integer
+          readOnly: true
+        blockchain:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        value_change:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+      required:
+      - address
+      - amount
+      - blockchain
+      - value
+      - value_change
+      - wallet_id
+    OrderReviewError:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/FieldErrorResponse'
+    WTCOrderDetailsResponse:
+      type: object
+      properties:
+        order_date:
+          type: string
+          format: date
+        product_name:
+          type: string
+          readOnly: true
+        issuer:
+          type: string
+          readOnly: true
+        exchange_code:
+          type: string
+          readOnly: true
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+          description: 'Purchase: dollar amount. Sale: token/share quantity.'
+        token_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+        expected_settlement_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Expected settlement date supplied by WisdomTree; pending until provided. UTC timestamp (ISO-8601 format).
+        trade_type:
+          type: string
+          description: 'Allowed: ''Purchase'', ''Sale''.'
+        order_type:
+          type: string
+          description: Market type. Defaults to 'primary' unless explicitly set to 'secondary'.
+        settlement_currency:
+          type: string
+        settlement_currency_name:
+          type: string
+          readOnly: true
+        bank_details:
+          allOf:
+          - $ref: '#/components/schemas/OrderReviewBankDetails'
+          readOnly: true
+        blockchain:
+          type: string
+        token_contract_address:
+          type: string
+          readOnly: true
+          pattern: ^0x[a-fA-F0-9]{40}$
+        settlement_wallet_address:
+          type: string
+          readOnly: true
+        wisdomtree_deposit_wallet_address:
+          type: string
+          readOnly: true
+        wisdomtree_deposit_wallet_address_qrcode:
+          type: string
+          readOnly: true
+        gross_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        net_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        transaction_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+        network_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+        execution_cost_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,7})?$
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+        conversion_order_hash:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        deposit_hash:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        issuer_order_hash:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        user:
+          type: string
+          readOnly: true
+        org:
+          type: string
+          readOnly: true
+        organisation:
+          type: string
+          readOnly: true
+        org_address:
+          type: string
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+        notes:
+          type: string
+          readOnly: true
+        status_log:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+      required:
+      - bank_details
+      - blockchain
+      - created_on
+      - exchange_code
+      - gross_value
+      - issuer
+      - net_value
+      - notes
+      - org
+      - org_address
+      - organisation
+      - product_name
+      - quantity
+      - settlement_currency
+      - settlement_currency_name
+      - settlement_wallet_address
+      - status
+      - status_log
+      - token_contract_address
+      - trade_type
+      - user
+      - wisdomtree_deposit_wallet_address
+      - wisdomtree_deposit_wallet_address_qrcode
+    LatestOrder:
+      type: object
+      properties:
+        trade_type:
+          type: string
+          description: 'Allowed: ''Purchase'', ''Sale''.'
+        user:
+          type: string
+        org:
+          type: string
+        status:
+          type: string
+          readOnly: true
+        expected_settlement_date:
+          type: string
+          format: date-time
+          description: UTC timestamp (inclusive, ISO-8601 format)
+        exchange_code:
+          type: string
+        issuer:
+          type: string
+        blockchain:
+          type: string
+          readOnly: true
+        settlement_currency:
+          type: string
+          readOnly: true
+        order_type:
+          type: string
+          readOnly: true
+        dollar_amount:
+          type: string
+          readOnly: true
+        token_amount:
+          type: string
+          readOnly: true
+        gross_value:
+          type: string
+          readOnly: true
+        net_value:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        transaction_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        execution_cost_fee:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,22}(?:\.\d{0,8})?$
+          readOnly: true
+        order_reference:
+          type: string
+          maxLength: 20
+        order_date:
+          type: string
+          format: date
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,20}(?:\.\d{0,18})?$
+      required:
+      - blockchain
+      - dollar_amount
+      - exchange_code
+      - execution_cost_fee
+      - gross_value
+      - issuer
+      - net_value
+      - order_type
+      - org
+      - quantity
+      - settlement_currency
+      - status
+      - token_amount
+      - trade_type
+      - transaction_fee
+      - user
+    FieldErrorResponse:
+      type: object
+      properties:
+        field_name:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+      required:
+      - field_name
+    OrderHashesResponse:
+      type: object
+      properties:
+        order_reference:
+          type: string
+          readOnly: true
+        conversion_order_hash:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        deposit_hash:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        issuer_order_hash:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - conversion_order_hash
+      - deposit_hash
+      - issuer_order_hash
+      - order_reference
+    OrderProductSelectionFieldChoice:
+      type: object
+      properties:
+        value: {}
+        label:
+          type:
+          - string
+          - 'null'
+      required:
+      - label
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+      - error
+    OrderProductSelectionResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderProductSelectionProduct'
+        selected_product:
+          allOf:
+          - $ref: '#/components/schemas/OrderProductSelectionProduct'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderProductSelectionField'
+      required:
+      - fields
+    SuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PortfolioAsset:
+      type: object
+      properties:
+        ticker:
+          type: string
+          readOnly: true
+        token_id:
+          type: integer
+          readOnly: true
+        token_name:
+          type: string
+          readOnly: true
+        token_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        token_value_change:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,8})?$
+          readOnly: true
+        as_of_date:
+          type: string
+          format: date
+          readOnly: true
+        wallets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortfolioWallet'
+          readOnly: true
+      required:
+      - as_of_date
+      - price
+      - ticker
+      - token_amount
+      - token_id
+      - token_name
+      - token_value_change
+      - value
+      - wallets
+    LatestOrdersIssuer:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+      required:
+      - code
+      - name
+    OrderRequest:
+      oneOf:
+      - $ref: '#/components/schemas/WTC'
+    DepositAddressResponse:
+      type: object
+      properties:
+        wisdomtree_deposit_address:
+          type: string
+          readOnly: true
+      required:
+      - wisdomtree_deposit_address
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+          scopes:
+            read: Read scope
+            write: Write scope
+            groups: Access to your groups
+x-refined-from:
+- connect.openapi.yaml
+- wisdomtree-connect-openapi.yml

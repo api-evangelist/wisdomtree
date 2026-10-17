@@ -1,0 +1,183 @@
+openapi: 3.2.0
+info:
+  title: Wisdomtree Organizations API
+  version: 1.0.0
+  x-refined-note:
+  - x-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged Organizations across 2 of this provider''s published API definitions: connect.openapi.yaml, wisdomtree-connect-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://app.wisdomtreeconnect.com
+  description: Production (per docs.wisdomtreeconnect.com/llms.txt)
+- url: https://api.sandbox.wisdomtreeconnect.com
+  description: Sandbox (per docs.wisdomtreeconnect.com/llms.txt)
+tags:
+- name: Organizations
+paths:
+  /api/organizations/me:
+    get:
+      operationId: RetrievesCurrentUser'sOrganizationDetails
+      description: Retrieves the details of the organization belonging to the current user. For moderators, will also return client organization details.
+      tags:
+      - Organizations
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisation'
+              examples:
+                Response:
+                  value:
+                    emails: []
+                    guid: a3c9d5b7-8a4d-4e35-9c1e-417cba654e2c
+                    legal_name: Direct Customer
+                    name: Direct Customer
+                    wallets:
+                      data:
+                        Ethereum Sepolia:
+                        - wallet_guid: a3c9d5b7-8a4d-4e35-9c1e-417cba654e2d
+                          public_key: '0x0000000000000000000000000000000000000000'
+                          status: Approved
+                    address:
+                      line_1: ''
+                      line_2: ''
+                      line_3: ''
+                      town: ''
+                      area: ''
+                      post_code: ''
+                      country: ''
+                      telephone_number: ''
+                      mobile_number: ''
+                    client_organizations:
+                    - guid: b4d0e6c8-9b5e-5f46-0d2f-528dcb765f3e
+                      name: Client1
+                      legal_name: Client Org 1
+                      client_external_id: client-001
+          description: ''
+      summary: Retrieves current user's organization details
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves current user's organization details
+components:
+  schemas:
+    WalletResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/WalletDetails'
+      required:
+      - data
+    Organisation:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/OrganisationAddress'
+        emails:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        wallets:
+          allOf:
+          - $ref: '#/components/schemas/WalletResponse'
+          readOnly: true
+        guid:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        legal_name:
+          type: string
+          maxLength: 255
+      required:
+      - emails
+      - guid
+      - legal_name
+      - name
+      - wallets
+    OrganisationAddress:
+      type: object
+      properties:
+        line_1:
+          type: string
+          maxLength: 255
+        line_2:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        line_3:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        town:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        area:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        post_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        country:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        telephone_number:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        mobile_number:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+      required:
+      - line_1
+    WalletDetails:
+      type: object
+      properties:
+        wallet_guid:
+          type: string
+          format: uuid
+        public_key:
+          type: string
+          maxLength: 256
+        status:
+          type: string
+          description: Created or Approved
+      required:
+      - public_key
+      - status
+      - wallet_guid
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+          scopes:
+            read: Read scope
+            write: Write scope
+            groups: Access to your groups
+x-refined-from:
+- connect.openapi.yaml
+- wisdomtree-connect-openapi.yml

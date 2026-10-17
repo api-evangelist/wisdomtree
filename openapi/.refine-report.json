@@ -1,0 +1,52 @@
+{
+  "provider": "wisdomtree",
+  "sources": [
+    "_original/connect.openapi.yaml",
+    "_ae-authored/wisdomtree-dataspan-openapi-generated.yml",
+    "wisdomtree-connect-openapi.yml"
+  ],
+  "outputs": [
+    "wisdomtree-accruals-api-openapi.yml",
+    "wisdomtree-dividend-payment-preferences-api-openapi.yml",
+    "wisdomtree-orders-api-openapi.yml",
+    "wisdomtree-organizations-api-openapi.yml",
+    "wisdomtree-statements-api-openapi.yml",
+    "wisdomtree-users-api-openapi.yml",
+    "wisdomtree-wallets-api-openapi.yml",
+    "wisdomtree-fund-data-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/wisdomtree-connect-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "connect.openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "connect.openapi.yaml: declared missing tag: Accruals",
+    "connect.openapi.yaml: declared missing tag: Dividend Payment Preferences",
+    "connect.openapi.yaml: declared missing tag: Orders",
+    "connect.openapi.yaml: declared missing tag: Organizations",
+    "connect.openapi.yaml: declared missing tag: Statements",
+    "connect.openapi.yaml: declared missing tag: Users",
+    "connect.openapi.yaml: declared missing tag: Wallets",
+    "wisdomtree-dataspan-openapi-generated.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "wisdomtree-connect-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Accruals",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Dividend Payment Preferences",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Orders",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Organizations",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Statements",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Users",
+    "wisdomtree-connect-openapi.yml: declared missing tag: Wallets",
+    "tag 'Accruals' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "tag 'Dividend Payment Preferences' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "tag 'Orders' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "tag 'Organizations' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "tag 'Statements' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "tag 'Users' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "tag 'Wallets' spans 2 source specs (connect.openapi.yaml, wisdomtree-connect-openapi.yml): per-path servers applied",
+    "apis.yml register: written (+8 apis, 8 total)"
+  ],
+  "skipped": []
+}

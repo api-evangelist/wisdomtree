@@ -1,0 +1,558 @@
+openapi: 3.2.0
+info:
+  title: Wisdomtree Wallets API
+  version: 1.0.0
+  x-refined-note:
+  - x-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged Wallets across 2 of this provider''s published API definitions: connect.openapi.yaml, wisdomtree-connect-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://app.wisdomtreeconnect.com
+  description: Production (per docs.wisdomtreeconnect.com/llms.txt)
+- url: https://api.sandbox.wisdomtreeconnect.com
+  description: Sandbox (per docs.wisdomtreeconnect.com/llms.txt)
+tags:
+- name: Wallets
+paths:
+  /api/organizations/{organization_guid}/wallets:
+    get:
+      operationId: RetrievesOrganizationWalletDetails
+      description: Retrieves wallet details of a specific organization
+      parameters:
+      - in: path
+        name: organization_guid
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: true
+      tags:
+      - Wallets
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletResponse'
+              examples:
+                Response:
+                  value:
+                    data:
+                      Ethereum Sepolia:
+                      - wallet_guid: a3c9d5b7-8a4d-4e35-9c1e-417cba654e2d
+                        public_key: '0x0000000000000000000000000000000000000000'
+                        status: Approved
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+      summary: Retrieves organization wallet details
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves organization wallet details
+    post:
+      operationId: CreatesWallet
+      description: Creates a new wallet for an organization in the system.
+      parameters:
+      - in: path
+        name: organization_guid
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: true
+      tags:
+      - Wallets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganisationExternalWallet'
+            examples:
+              Request:
+                value:
+                  public_key: '0x38ac787Aa4e1240f4FdAFfCbb82BdDa49A8CE67B'
+                  blockchain: Ethereum Sepolia
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OrganisationExternalWallet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OrganisationExternalWallet'
+        required: true
+      security:
+      - oauth2:
+        - write
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                Response:
+                  value:
+                    message: Wallet created successfully
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+      summary: Creates wallet
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Creates Wallet
+  /api/organizations/{organization_guid}/wallets/{wallet_guid}:
+    patch:
+      operationId: ApprovesWallet
+      description: Allows the user to approve an existing wallet in the system.
+      parameters:
+      - in: path
+        name: organization_guid
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: true
+      - in: path
+        name: wallet_guid
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: true
+      tags:
+      - Wallets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWalletApprovalRequest'
+            examples:
+              Request:
+                value:
+                  next_state_id: 15
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWalletApprovalRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWalletApprovalRequest'
+      security:
+      - oauth2:
+        - write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                Response:
+                  value:
+                    message: 'Wallet #wallet guid approved successfully'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+      summary: Approves wallet
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Approves Wallet
+  /api/organizations/me/wallets:
+    get:
+      operationId: RetrievesCurrentUser'sOrganizationWallets
+      description: Retrieves all wallets for the current user's organization, including wallet nickname, wallet address, blockchain, status, and available actions.
+      tags:
+      - Wallets
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletListResponse'
+              examples:
+                Response:
+                  value:
+                    data:
+                    - wallet_guid: a3c9d5b7-8a4d-4e35-9c1e-417cba654e2d
+                      wallet_nickname: Operations Wallet
+                      wallet_address: '0x0000000000000000000000000000000000000000'
+                      blockchain: Ethereum Sepolia
+                      status: Created
+                      actions:
+                      - next_state_id: 15
+                        label: Approved
+                    - wallet_guid: 4fb19d0e-7ca2-4e2c-9d90-c5fbbf0f5d01
+                      wallet_nickname: ''
+                      wallet_address: '0x1111111111111111111111111111111111111111'
+                      blockchain: Ethereum Sepolia
+                      status: Approved
+                      actions: []
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Response:
+                  value:
+                    error: string
+          description: ''
+      summary: Retrieves current user's organization wallets
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves current user's organization wallets
+  /api/organizations/me/wallets/{wallet_guid}/details:
+    get:
+      operationId: RetrievesCurrentUser'sOrganizationWalletEditDetails
+      description: Retrieves the edit metadata for a wallet belonging to the current user's organization. For Moderator users, includes the target client organisation details as a read-only object.
+      parameters:
+      - in: path
+        name: wallet_guid
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: true
+      tags:
+      - Wallets
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletEditDetailResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Retrieves current user's organization wallet edit details
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves current user's organization wallet edit details
+    patch:
+      operationId: UpdatesCurrentUser'sOrganizationWalletNickname
+      description: Updates the nickname of a wallet belonging to the current user's organization.
+      parameters:
+      - in: path
+        name: wallet_guid
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: true
+      tags:
+      - Wallets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWalletNicknameUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWalletNicknameUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWalletNicknameUpdate'
+      security:
+      - oauth2:
+        - write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Updates current user's organization wallet nickname
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Updates current user's organization wallet nickname
+  /api/organizations/me/wallets/chains:
+    get:
+      operationId: RetrievesCurrentUser'sOrganizationWalletChains
+      description: Retrieves the available blockchain chains for wallet creation for the current user's organization. For Moderator users, also returns the available client organisations that can be used for wallet creation.
+      tags:
+      - Wallets
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletCreateMetadataResponse'
+          description: ''
+      summary: Retrieves current user's organization wallet chains
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves current user's organization wallet chains
+components:
+  schemas:
+    WalletCreateMetadataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletChainResponse'
+        client_organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletCreateOrganisationChoice'
+      required:
+      - data
+    PatchedWalletApprovalRequest:
+      type: object
+      properties:
+        next_state_id:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+      - error
+    WalletActionResponse:
+      type: object
+      properties:
+        next_state_id:
+          type: integer
+        label:
+          type: string
+      required:
+      - label
+      - next_state_id
+    SuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    WalletChainResponse:
+      type: object
+      properties:
+        chain_id:
+          type: integer
+        blockchain:
+          type: string
+      required:
+      - blockchain
+      - chain_id
+    WalletListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletListItemResponse'
+      required:
+      - data
+    OrganisationExternalWallet:
+      type: object
+      properties:
+        public_key:
+          type: string
+          maxLength: 256
+        blockchain:
+          type: string
+        nickname:
+          type: string
+          maxLength: 255
+        organization_guid:
+          type: string
+          format: uuid
+          writeOnly: true
+      required:
+      - blockchain
+      - public_key
+    WalletListItemResponse:
+      type: object
+      properties:
+        wallet_guid:
+          type: string
+          format: uuid
+        chain_id:
+          type: integer
+        organization_name:
+          type: string
+        wallet_nickname:
+          type: string
+        wallet_address:
+          type: string
+          maxLength: 256
+        blockchain:
+          type: string
+        created_on:
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: Created or Approved
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletActionResponse'
+      required:
+      - actions
+      - blockchain
+      - chain_id
+      - created_on
+      - organization_name
+      - status
+      - wallet_address
+      - wallet_guid
+      - wallet_nickname
+    PatchedWalletNicknameUpdate:
+      type: object
+      properties:
+        nickname:
+          type: string
+          maxLength: 255
+    WalletDetails:
+      type: object
+      properties:
+        wallet_guid:
+          type: string
+          format: uuid
+        public_key:
+          type: string
+          maxLength: 256
+        status:
+          type: string
+          description: Created or Approved
+      required:
+      - public_key
+      - status
+      - wallet_guid
+    WalletOrganisationSummary:
+      type: object
+      properties:
+        organization_guid:
+          type: string
+          format: uuid
+        organization_name:
+          type: string
+      required:
+      - organization_guid
+      - organization_name
+    WalletResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/WalletDetails'
+      required:
+      - data
+    WalletEditDetailResponse:
+      type: object
+      properties:
+        wallet_guid:
+          type: string
+          format: uuid
+        public_key:
+          type: string
+          maxLength: 256
+        blockchain:
+          type: string
+        chain_id:
+          type: integer
+        nickname:
+          type: string
+        organisation:
+          $ref: '#/components/schemas/WalletOrganisationSummary'
+      required:
+      - blockchain
+      - chain_id
+      - nickname
+      - public_key
+      - wallet_guid
+    WalletCreateOrganisationChoice:
+      type: object
+      properties:
+        organization_guid:
+          type: string
+          format: uuid
+        organization_name:
+          type: string
+      required:
+      - organization_guid
+      - organization_name
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+          scopes:
+            read: Read scope
+            write: Write scope
+            groups: Access to your groups
+x-refined-from:
+- connect.openapi.yaml
+- wisdomtree-connect-openapi.yml

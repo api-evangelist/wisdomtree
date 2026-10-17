@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  title: Wisdomtree Users API
+  version: 1.0.0
+  x-refined-note:
+  - x-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged Users across 2 of this provider''s published API definitions: connect.openapi.yaml, wisdomtree-connect-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://app.wisdomtreeconnect.com
+  description: Production (per docs.wisdomtreeconnect.com/llms.txt)
+- url: https://api.sandbox.wisdomtreeconnect.com
+  description: Sandbox (per docs.wisdomtreeconnect.com/llms.txt)
+tags:
+- name: Users
+paths:
+  /api/users/me/api-keys:
+    get:
+      operationId: ListCurrentUserAPIKeys
+      description: Lists OAuth client credentials owned by the current user.
+      tags:
+      - Users
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyListResponse'
+          description: ''
+      summary: List current user API keys
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: List Current User API Keys
+    post:
+      operationId: CreateCurrentUserAPIKey
+      description: Creates a new OAuth client credential owned by the current user. The client_secret is returned only in this response.
+      tags:
+      - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIKeyCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/APIKeyCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/APIKeyCreate'
+        required: true
+      security:
+      - oauth2:
+        - write
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyCreateResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Create current user API key
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Current User API Key
+  /api/users/me/api-keys/{application_id}:
+    delete:
+      operationId: DeleteCurrentUserAPIKey
+      description: Deletes an OAuth client credential owned by the current user.
+      parameters:
+      - in: path
+        name: application_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - Users
+      security:
+      - oauth2:
+        - write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ''
+      summary: Delete current user API key
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete Current User API Key
+components:
+  schemas:
+    APIKeyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/APIKeyListItem'
+        token_endpoint:
+          type: string
+        grant_type:
+          type: string
+        supported_scopes:
+          type: array
+          items:
+            type: string
+      required:
+      - data
+      - grant_type
+      - supported_scopes
+      - token_endpoint
+    APIKeyCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        client_id:
+          type: string
+          maxLength: 100
+        client_type:
+          enum:
+          - confidential
+          - public
+          type: string
+          description: '* `confidential` - Confidential
+
+            * `public` - Public'
+          x-spec-enum-id: 6de8a18fd0ba1b55
+        authorization_grant_type:
+          enum:
+          - authorization-code
+          - implicit
+          - password
+          - client-credentials
+          - openid-hybrid
+          type: string
+          description: '* `authorization-code` - Authorization code
+
+            * `implicit` - Implicit
+
+            * `password` - Resource owner password-based
+
+            * `client-credentials` - Client credentials
+
+            * `openid-hybrid` - OpenID connect hybrid'
+          x-spec-enum-id: 22f388741b5d4173
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+        client_secret:
+          type: string
+        token_endpoint:
+          type: string
+        grant_type:
+          type: string
+        supported_scopes:
+          type: array
+          items:
+            type: string
+      required:
+      - authorization_grant_type
+      - client_secret
+      - client_type
+      - created
+      - grant_type
+      - id
+      - supported_scopes
+      - token_endpoint
+      - updated
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+      - error
+    SuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    APIKeyCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+      required:
+      - name
+    APIKeyListItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        client_id:
+          type: string
+          maxLength: 100
+        client_type:
+          enum:
+          - confidential
+          - public
+          type: string
+          description: '* `confidential` - Confidential
+
+            * `public` - Public'
+          x-spec-enum-id: 6de8a18fd0ba1b55
+        authorization_grant_type:
+          enum:
+          - authorization-code
+          - implicit
+          - password
+          - client-credentials
+          - openid-hybrid
+          type: string
+          description: '* `authorization-code` - Authorization code
+
+            * `implicit` - Implicit
+
+            * `password` - Resource owner password-based
+
+            * `client-credentials` - Client credentials
+
+            * `openid-hybrid` - OpenID connect hybrid'
+          x-spec-enum-id: 22f388741b5d4173
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - authorization_grant_type
+      - client_type
+      - created
+      - id
+      - updated
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+          scopes:
+            read: Read scope
+            write: Write scope
+            groups: Access to your groups
+x-refined-from:
+- connect.openapi.yaml
+- wisdomtree-connect-openapi.yml

@@ -1,0 +1,225 @@
+openapi: 3.2.0
+info:
+  title: Wisdomtree Dividend Payment Preferences API
+  version: 1.0.0
+  x-refined-note:
+  - x-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged Dividend Payment Preferences across 2 of this provider''s published API definitions: connect.openapi.yaml, wisdomtree-connect-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://app.wisdomtreeconnect.com
+  description: Production (per docs.wisdomtreeconnect.com/llms.txt)
+- url: https://api.sandbox.wisdomtreeconnect.com
+  description: Sandbox (per docs.wisdomtreeconnect.com/llms.txt)
+tags:
+- name: Dividend Payment Preferences
+paths:
+  /api/dividend-payment-preferences/:
+    get:
+      operationId: RetrievesAllDividendPaymentPreferences
+      description: Retrieves the dividend payment preferences table content for the organization.
+      parameters:
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: 'Optional. For Moderator users only: target client organization GUID.'
+      tags:
+      - Dividend Payment Preferences
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DividendPaymentPreferenceListItem'
+          description: ''
+      summary: Retrieves all dividend payment preferences
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieves All Dividend Payment Preferences
+  /api/dividend-payment-preferences/{dpp_guid}:
+    get:
+      operationId: RetrieveDividendPaymentPreferenceDetails
+      description: Retrieves a specific dividend payment preference record together with editable field metadata such as dividend payment currency choices.
+      parameters:
+      - in: path
+        name: dpp_guid
+        schema:
+          type: string
+        required: true
+      tags:
+      - Dividend Payment Preferences
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DividendPaymentPreferenceDetail'
+          description: ''
+      summary: Retrieve dividend payment preference details
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Dividend Payment Preference Details
+  /api/dividend-payment-preferences/{dpp_guid}/edit:
+    post:
+      operationId: UpdateDividendPaymentPreferences
+      description: Updates the dividend payment preference for a specific organization mapping.
+      parameters:
+      - in: path
+        name: dpp_guid
+        schema:
+          type: string
+        required: true
+      tags:
+      - Dividend Payment Preferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditDividendPaymentPreferences'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EditDividendPaymentPreferences'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EditDividendPaymentPreferences'
+        required: true
+      security:
+      - oauth2:
+        - write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditDividendPaymentPreferences'
+          description: ''
+      summary: Update dividend payment preferences
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Dividend Payment Preferences
+  /api/dividend-payment-preferences/export:
+    get:
+      operationId: DownloadDividendPaymentPreferencesWorkbook
+      description: Downloads the dividend payment preferences table as an Excel workbook.
+      parameters:
+      - in: query
+        name: organization_guid
+        schema:
+          type: string
+          format: uuid
+        description: 'Optional. For Moderator users only: target client organization GUID.'
+      tags:
+      - Dividend Payment Preferences
+      security:
+      - oauth2:
+        - read
+      responses:
+        '200':
+          description: Dividend payment preferences workbook (.xlsx)
+      summary: Download dividend payment preferences workbook
+      x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Download Dividend Payment Preferences Workbook
+components:
+  schemas:
+    EditDividendPaymentPreferences:
+      type: object
+      description: Serializer for updating the dividend payment preferences for an organisation.
+      properties:
+        asset_name:
+          type: string
+        asset_symbol:
+          type: string
+        blockchain:
+          type: string
+        dividend_payment_currency:
+          type: string
+      required:
+      - dividend_payment_currency
+    DividendPaymentPreferenceListItem:
+      type: object
+      properties:
+        dividend_mapping_id:
+          type: integer
+        token_id:
+          type: integer
+        organisation_id:
+          type: integer
+        asset_name:
+          type:
+          - string
+          - 'null'
+        asset_symbol:
+          type: string
+        block_chain:
+          type: string
+        dividend_payment_currency:
+          type: string
+      required:
+      - asset_name
+      - asset_symbol
+      - block_chain
+      - dividend_mapping_id
+      - dividend_payment_currency
+      - organisation_id
+      - token_id
+    DividendPaymentPreferenceDetail:
+      type: object
+      properties:
+        dividend_mapping_id:
+          type: integer
+        token_id:
+          type: integer
+        organisation_id:
+          type: integer
+        asset_name:
+          type:
+          - string
+          - 'null'
+        asset_symbol:
+          type: string
+        block_chain:
+          type: string
+        dividend_payment_currency:
+          type:
+          - string
+          - 'null'
+        dividend_payment_currency_label:
+          type:
+          - string
+          - 'null'
+        field_details:
+          type: object
+          additionalProperties: {}
+      required:
+      - asset_name
+      - asset_symbol
+      - block_chain
+      - dividend_mapping_id
+      - dividend_payment_currency
+      - dividend_payment_currency_label
+      - field_details
+      - organisation_id
+      - token_id
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://app.wisdomtreeconnect.com/o/token/
+          scopes:
+            read: Read scope
+            write: Write scope
+            groups: Access to your groups
+x-refined-from:
+- connect.openapi.yaml
+- wisdomtree-connect-openapi.yml

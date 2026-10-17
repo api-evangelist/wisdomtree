@@ -1,0 +1,271 @@
+openapi: 3.2.0
+info:
+  title: WisdomTree DataSpan Fund Data API
+  version: '2026-10-14'
+  description: 'GENERATED FROM DOCUMENTATION by API Evangelist on 2026-10-14: 5 operation(s) read from the structured dataspan section of https://docs.wisdomtreeconnect.com/docs-data.json. This is not the provider''s published contract; WisdomTree publishes no machine-readable contract for the DataSpan Fund Data API. Response field lists are only those the documentation names; types are not stated. Rate limits: Rate limits are enforced. WisdomTree can whitelist if limits are hit.'
+  x-generated-from: documentation
+  x-provenance: generated
+  x-authored-by: API Evangelist
+  x-generated: '2026-10-14'
+  x-generator: scripted transform of docs-data.json (no model)
+  x-sources:
+  - https://docs.wisdomtreeconnect.com/docs-data.json
+  - https://docs.wisdomtreeconnect.com/llms.txt
+servers:
+- url: https://dataspanapi.wisdomtree.com
+tags:
+- name: Fund Data
+  description: WisdomTree DataSpan fund NAV, aggregates and accrual data.
+paths:
+  /funddetails/nav/:
+    get:
+      operationId: getNav
+      tags:
+      - Fund Data
+      summary: NAV
+      description: Return NAV and related current product fields for a ticker.
+      x-source: https://docs.wisdomtreeconnect.com/docs-data.json
+      parameters:
+      - name: ticker
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - CRDYX
+          - WTPIX
+          - EQTYX
+          - FLTTX
+          - LNGVX
+          - MODRX
+          - SPXUX
+          - TECHX
+          - TIPSX
+          - WTGXX
+          - WTLGX
+          - WTSTX
+          - WTTSX
+          - WTSIX
+          - WTSYX
+        description: Fund ticker
+      responses:
+        '200':
+          description: 'Fund data (fields observed in the documentation: ticker, relatedTicker, name, dt, nav, sharesOutstanding, aum, navPrevious, navDelta, navDeltaPCT)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticker: {}
+                  relatedTicker: {}
+                  name: {}
+                  dt: {}
+                  nav: {}
+                  sharesOutstanding: {}
+                  aum: {}
+                  navPrevious: {}
+                  navDelta: {}
+                  navDeltaPCT: {}
+      security:
+      - dataspanKey: []
+  /funddetails/daily_aggregates/:
+    get:
+      operationId: getDailyAggregates
+      tags:
+      - Fund Data
+      summary: Daily Aggregates / Historical Metrics
+      description: Return full history for the requested metric. Cache TTL is 2 hours per ticker + metricID.
+      x-source: https://docs.wisdomtreeconnect.com/docs-data.json
+      parameters:
+      - name: ticker
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - CRDYX
+          - WTPIX
+          - EQTYX
+          - FLTTX
+          - LNGVX
+          - MODRX
+          - SPXUX
+          - TECHX
+          - TIPSX
+          - WTGXX
+          - WTLGX
+          - WTSTX
+          - WTTSX
+          - WTSIX
+          - WTSYX
+        description: Fund ticker
+      - name: metricID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Metric identifier (see metricIds in the source document)
+      responses:
+        '200':
+          description: 'Fund data (fields observed in the documentation: dt, entityTicker, metricID, metric, value)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dt: {}
+                  entityTicker: {}
+                  metricID: {}
+                  metric: {}
+                  value: {}
+      security:
+      - dataspanKey: []
+  /funddetails/open_accruals/:
+    get:
+      operationId: getOpenAccruals
+      tags:
+      - Fund Data
+      summary: Open Accruals
+      description: Return daily factor / open accrual data for a ticker.
+      x-source: https://docs.wisdomtreeconnect.com/docs-data.json
+      parameters:
+      - name: ticker
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - CRDYX
+          - WTPIX
+          - EQTYX
+          - FLTTX
+          - LNGVX
+          - MODRX
+          - SPXUX
+          - TECHX
+          - TIPSX
+          - WTGXX
+          - WTLGX
+          - WTSTX
+          - WTTSX
+          - WTSIX
+          - WTSYX
+        description: Fund ticker
+      responses:
+        '200':
+          description: 'Fund data (fields observed in the documentation: wtID, dt, ticker, sharesOutstanding, dailyFactor, calculatedAccrual, runningAccrual)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wtID: {}
+                  dt: {}
+                  ticker: {}
+                  sharesOutstanding: {}
+                  dailyFactor: {}
+                  calculatedAccrual: {}
+                  runningAccrual: {}
+      security:
+      - dataspanKey: []
+  /funddetails/shares_outstanding/:
+    get:
+      operationId: getSharesOutstanding
+      tags:
+      - Fund Data
+      summary: Shares Outstanding
+      description: Return shares outstanding for a ticker.
+      x-source: https://docs.wisdomtreeconnect.com/docs-data.json
+      parameters:
+      - name: ticker
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - CRDYX
+          - WTPIX
+          - EQTYX
+          - FLTTX
+          - LNGVX
+          - MODRX
+          - SPXUX
+          - TECHX
+          - TIPSX
+          - WTGXX
+          - WTLGX
+          - WTSTX
+          - WTTSX
+          - WTSIX
+          - WTSYX
+        description: Fund ticker
+      responses:
+        '200':
+          description: 'Fund data (fields observed in the documentation: result)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result: {}
+      security:
+      - dataspanKey: []
+  /funddetails/aggregates/:
+    get:
+      operationId: getAggregates
+      tags:
+      - Fund Data
+      summary: Aggregates
+      description: Return aggregate product data for a ticker.
+      x-source: https://docs.wisdomtreeconnect.com/docs-data.json
+      parameters:
+      - name: ticker
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - CRDYX
+          - WTPIX
+          - EQTYX
+          - FLTTX
+          - LNGVX
+          - MODRX
+          - SPXUX
+          - TECHX
+          - TIPSX
+          - WTGXX
+          - WTLGX
+          - WTSTX
+          - WTTSX
+          - WTSIX
+          - WTSYX
+        description: Fund ticker
+      responses:
+        '200':
+          description: 'Fund data (fields observed in the documentation: metricID, entityID, entityTicker, wtID, dt, aggregateTypeID, aggregateType, aggTypeDesc, metric, value, metricSort)'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metricID: {}
+                  entityID: {}
+                  entityTicker: {}
+                  wtID: {}
+                  dt: {}
+                  aggregateTypeID: {}
+                  aggregateType: {}
+                  aggTypeDesc: {}
+                  metric: {}
+                  value: {}
+                  metricSort: {}
+      security:
+      - dataspanKey: []
+components:
+  securitySchemes:
+    dataspanKey:
+      type: apiKey
+      in: header
+      name: x-wt-dataspan-key
+      description: Required for any URI containing funddetails.
