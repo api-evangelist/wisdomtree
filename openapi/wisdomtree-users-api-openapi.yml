@@ -279,3 +279,9 @@ components:
 x-refined-from:
 - connect.openapi.yaml
 - wisdomtree-connect-openapi.yml
+x-provenance:
+  method: harvested
+  publisher: WisdomTree
+  source: https://docs.wisdomtreeconnect.com/openapi/connect.openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
