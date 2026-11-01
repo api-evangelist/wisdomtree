@@ -64,5 +64,135 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-WisdomTree is a company surfaced via the API Evangelist harvest backlog (source: market-gap:crypto-exchanges(NYDFS)) and added to the network as a stub for full-pipeline profiling.
-- https://www.wisdomtree.com
+WisdomTree is a global asset manager issuing ETFs and tokenized funds. Through WisdomTree Connect it offers an OAuth2-secured REST API for institutions to create subscription and redemption orders, manage wallets and track settlement of regulated tokenized assets, plus a DataSpan Fund Data API for NAV, aggregates, accruals and shares outstanding per fund ticker.
+
+**Areas:** Company · Asset Management · ETFs · Tokenization · Tokenized Funds · Financial Services · Fund Data
+
+## WisdomTree on APIs.io
+
+Everything profiled for WisdomTree is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/wisdomtree/](https://apis.io/providers/wisdomtree/)** — or go straight to one of the APIs or properties below.
+
+### APIs (8)
+
+- [WisdomTree Accruals API](https://apis.io/apis/wisdomtree/wisdomtree-accruals-api/) — The Accruals API from WisdomTree — 1 operation(s) for accruals.
+- [WisdomTree Dividend Payment Preferences API](https://apis.io/apis/wisdomtree/wisdomtree-dividend-payment-preferences-api/) — The Dividend Payment Preferences API from WisdomTree — 4 operation(s) for dividend payment preferences.
+- [WisdomTree Fund Data API](https://apis.io/apis/wisdomtree/wisdomtree-fund-data-api/) — WisdomTree DataSpan fund NAV, aggregates and accrual data.
+- [WisdomTree Orders API](https://apis.io/apis/wisdomtree/wisdomtree-orders-api/) — The Orders API from WisdomTree — 17 operation(s) for orders.
+- [WisdomTree Organizations API](https://apis.io/apis/wisdomtree/wisdomtree-organizations-api/) — The Organizations API from WisdomTree — 1 operation(s) for organizations.
+- [WisdomTree Statements API](https://apis.io/apis/wisdomtree/wisdomtree-statements-api/) — The Statements API from WisdomTree — 2 operation(s) for statements.
+- [WisdomTree Users API](https://apis.io/apis/wisdomtree/wisdomtree-users-api/) — The Users API from WisdomTree — 2 operation(s) for users.
+- [WisdomTree Wallets API](https://apis.io/apis/wisdomtree/wisdomtree-wallets-api/) — The Wallets API from WisdomTree — 5 operation(s) for wallets.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [wisdomtree-mcp.yml](https://apis.io/servers/wisdomtree/wisdomtree-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Wisdomtree Agentic Access](https://apis.io/agentic-access/wisdomtree/wisdomtree-agentic-access/)
+
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [APIKeyCreateResponse](https://apis.io/schemas/wisdomtree/wisdomtree-apikey-create-response/)
+- [DividendPaymentPreferenceDetail](https://apis.io/schemas/wisdomtree/wisdomtree-dividend-payment-preference-detail/)
+- [Order](https://apis.io/schemas/wisdomtree/wisdomtree-order/)
+- [OrderReviewResponse](https://apis.io/schemas/wisdomtree/wisdomtree-order-review-response/)
+- [WTC](https://apis.io/schemas/wisdomtree/wisdomtree-wtc/)
+- [WTCOrderDetailsResponse](https://apis.io/schemas/wisdomtree/wisdomtree-wtcorder-details-response/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Wisdomtree Context](https://apis.io/jsonld/wisdomtree/wisdomtree-context/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [WisdomTree API Rules](https://apis.io/rules/wisdomtree/wisdomtree-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Wisdomtree Authentication](https://apis.io/security/wisdomtree/wisdomtree-authentication/)
+- [Wisdomtree Domain Security](https://apis.io/security/wisdomtree/wisdomtree-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Wisdomtree Scopes](https://apis.io/scopes/wisdomtree/wisdomtree-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.wisdomtree.com)
+- [Documentation](https://docs.wisdomtreeconnect.com/)
+
+## API Evangelist rating
+
+**Kin Score 30.4** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 51.9 |
+| Contract governance | 22.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 0.0 |
+
+**Agent readiness 32.3** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 25.0** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/wisdomtree/](https://apis.io/providers/wisdomtree/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for WisdomTree: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/wisdomtree/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
